@@ -1,4 +1,3 @@
-#-*- encoding: utf-8 -*-
 # from pyknp import Juman
 # import sys
 # import codecs
@@ -47,7 +46,6 @@ def select_dependency_structure(line):
     tuples = []
     for bnst in bnst_list:
         if bnst.parent_id != -1:
-            # (from, to)
             tuples.append((select_normalization_representative_notation(bnst.fstring), select_normalization_representative_notation(bnst_dic[bnst.parent_id].fstring)))
 
     return tuples
