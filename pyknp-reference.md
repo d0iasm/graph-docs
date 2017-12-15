@@ -36,7 +36,8 @@ pyknp/
 	 
 
 ## Import modules
-```__init__.py
+__init__.py
+```python
 from pyknp.juman.morpheme import Morpheme
 from pyknp.juman.mlist import MList
 from pyknp.juman.juman import Juman, Socket, Subprocess
@@ -52,4 +53,22 @@ from pyknp.knp.syngraph import SynNodes, SynNode
 from pyknp.knp.blist import BList
 from pyknp.knp.knp import KNP
 import pyknp.evaluate
+```
+
+## JUMAN simple usage
+```python
+import pyknp
+
+juman = pyknp.Juman()
+test_str = "この文を解析してください。"
+print(juman.analysis(test_str)
+```
+
+## KNP simple usage
+```python
+import pyknp
+
+knp = pyknp.KNP()
+test_str = "この文を解析してください。"
+print(knp.parse(test_str)
 ```
