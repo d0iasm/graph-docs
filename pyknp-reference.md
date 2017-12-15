@@ -6,7 +6,7 @@ Download from [here](http://nlp.ist.i.kyoto-u.ac.jp/index.php?PyKNP).
 pyknp/  
 　├ \_\_init\_\_.py  
 　├ evaluate/  
-　│　├ __init__.py  
+　│　├ \_\_init\_\_.py  
 　│　├ dep.py  
 　│　├ mrph.py  
 　│　├ pharase.py  
