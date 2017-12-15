@@ -4,7 +4,7 @@ Download from [here](http://nlp.ist.i.kyoto-u.ac.jp/index.php?PyKNP).
 
 ## Directories Structure
 pyknp/  
-  ├ __init__.py  
+　├ __init__.py  
 　├ evaluate/  
 　│　├ __init__.py  
 　│　├ dep.py  
