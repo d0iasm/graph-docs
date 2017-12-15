@@ -1,5 +1,3 @@
-#-*- encoding: utf-8 -*-
-
 from __future__ import absolute_import
 from pyknp import Juman, Jumanpp
 from pyknp import Socket, Subprocess  # TODO(john): move to separate file
@@ -43,7 +41,7 @@ class KNP(object):
 
     def parse(self, sentence):
         """
-        文字列 sentence を対象として構文解析を行い，構文解析結果オブジェクトを返す．
+        文字列 sentence を対象として構文解析を行い，構文解析結果オブジェクト BList を返す．
         """
         assert(isinstance(sentence, six.text_type))
         juman_lines = self.juman.juman_lines(sentence)

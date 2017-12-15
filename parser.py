@@ -7,10 +7,22 @@ def select_normalization_representative_notation(fstring):
     return fstring[begin + len('正規化代表表記:'): end]
 
 
+def find_original_word(bunsetsu):
+    """
+    @param bunsetsu pyknp.knp.bunsetsu Class
+    @return an original word
+    """
+    return bunsetsu.mrph_list()[0].genkei
+
+
 def select_dependency_structure(line):
     knp = pyknp.KNP()
     result = knp.parse(line)
     bnst_list = result.bnst_list()
+ 
+    for bnst in bnst_list:
+        print(find_original_word(bnst))
+
     bnst_dic = dict((x.bnst_id, x) for x in bnst_list)
 
     tuples = []
@@ -32,18 +44,17 @@ def test_juman(line):
               % (mrph.midasi, mrph.yomi, mrph.genkei, mrph.hinsi, mrph.bunrui, mrph.katuyou1, mrph.katuyou2, mrph.imis, mrph.repname))
 
 
-def simple_juman():
-    juman = pyknp.Juman()
+def simple(line):
     knp = pyknp.KNP()
-    test_str = 'この文を解析してください。'
+    print(vars(knp.parse(line)))
 
-    print(juman.analysis(test_str, knp.parse(test_str))
 
 
 if __name__ == '__main__':
-    simple_juman()
-    # line = '太郎は花子が読んでいる本を次郎に渡した'
-    # tuples = select_dependency_structure(line)
+    line = '太郎は花子が読んでいる本を次郎に渡した'
+    tuples = select_dependency_structure(line)
     # test_juman(line)
-    # for t in tuples:
-        # print(t[0] + ' => ' + t[1])
+    for t in tuples:
+        print(t[0] + ' => ' + t[1])
+
+    # simple(line)

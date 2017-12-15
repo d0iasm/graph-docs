@@ -1,5 +1,3 @@
-#-*- encoding: utf-8 -*-
-
 from __future__ import absolute_import
 from pyknp import Argument, Pas
 from pyknp import Bunsetsu
