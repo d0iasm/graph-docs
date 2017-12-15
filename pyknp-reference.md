@@ -4,7 +4,7 @@ Download from [here](http://nlp.ist.i.kyoto-u.ac.jp/index.php?PyKNP).
 
 ## Directories Structure
 pyknp/  
-　├ __init__.py  
+　├ \_\_init\_\_.py  
 　├ evaluate/  
 　│　├ __init__.py  
 　│　├ dep.py  
@@ -12,14 +12,14 @@ pyknp/
 　│　├ pharase.py  
 　│　└ scorer.py  
 　├ juman/  
-　│　├ __init__.py  
+　│　├ \_\_init\_\_.py  
 　│　├ jumanapp.py  
 　│　├ juman.py  
 　│　├ mlist.py  
 　│　├ morpheme.py  
 　│　└ simple.py  
 　├ knp/  
-　│　├ __init__.py  
+　│　├ \_\_init\_\_.py  
 　│　├ blist.py  
 　│　├ bunsetsu.py  
 　│　├ drawtree.py  
@@ -32,11 +32,11 @@ pyknp/
 　│　├ tag.py  
 　│　└ tlist.py  
 　└ scripts/  
-     └ knp-drawtree  
+　　　└ knp-drawtree  
 	 
 
 ## Import modules
-__init__.py
+\_\_init\_\_.py
 ```python
 from pyknp.juman.morpheme import Morpheme
 from pyknp.juman.mlist import MList
