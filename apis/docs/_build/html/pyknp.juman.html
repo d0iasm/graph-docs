@@ -1,0 +1,426 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>pyknp.juman package &#8212; pyknp  documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="pyknp.knp package" href="pyknp.knp.html" />
+    <link rel="prev" title="pyknp.evaluate package" href="pyknp.evaluate.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="pyknp-juman-package">
+<h1>pyknp.juman package<a class="headerlink" href="#pyknp-juman-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-pyknp.juman.juman">
+<span id="pyknp-juman-juman-module"></span><h2>pyknp.juman.juman module<a class="headerlink" href="#module-pyknp.juman.juman" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="pyknp.juman.juman.Juman">
+<em class="property">class </em><code class="descclassname">pyknp.juman.juman.</code><code class="descname">Juman</code><span class="sig-paren">(</span><em>command='juman'</em>, <em>server=None</em>, <em>port=32000</em>, <em>timeout=30</em>, <em>option='-e2 -B'</em>, <em>rcfile=''</em>, <em>ignorepattern=''</em>, <em>pattern='EOS'</em><span class="sig-paren">)</span><a class="headerlink" href="#pyknp.juman.juman.Juman" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>形態素解析器 JUMAN を Python から利用するためのモジュールである．</p>
+<dl class="method">
+<dt id="pyknp.juman.juman.Juman.analysis">
+<code class="descname">analysis</code><span class="sig-paren">(</span><em>input_str</em><span class="sig-paren">)</span><a class="headerlink" href="#pyknp.juman.juman.Juman.analysis" title="Permalink to this definition">¶</a></dt>
+<dd><p>指定された文字列 input_str を形態素解析し，その結果を MList オブジェクトとして返す．</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyknp.juman.juman.Juman.juman">
+<code class="descname">juman</code><span class="sig-paren">(</span><em>input_str</em><span class="sig-paren">)</span><a class="headerlink" href="#pyknp.juman.juman.Juman.juman" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pyknp.juman.juman.Juman.juman_lines">
+<code class="descname">juman_lines</code><span class="sig-paren">(</span><em>input_str</em><span class="sig-paren">)</span><a class="headerlink" href="#pyknp.juman.juman.Juman.juman_lines" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pyknp.juman.juman.Juman.result">
+<code class="descname">result</code><span class="sig-paren">(</span><em>input_str</em><span class="sig-paren">)</span><a class="headerlink" href="#pyknp.juman.juman.Juman.result" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="pyknp.juman.juman.JumanTest">
+<em class="property">class </em><code class="descclassname">pyknp.juman.juman.</code><code class="descname">JumanTest</code><span class="sig-paren">(</span><em>methodName='runTest'</em><span class="sig-paren">)</span><a class="headerlink" href="#pyknp.juman.juman.JumanTest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">unittest.case.TestCase</span></code></p>
+<dl class="method">
+<dt id="pyknp.juman.juman.JumanTest.setUp">
+<code class="descname">setUp</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyknp.juman.juman.JumanTest.setUp" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pyknp.juman.juman.JumanTest.test_normal">
+<code class="descname">test_normal</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyknp.juman.juman.JumanTest.test_normal" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pyknp.juman.juman.JumanTest.test_whitespace">
+<code class="descname">test_whitespace</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyknp.juman.juman.JumanTest.test_whitespace" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="pyknp.juman.juman.Socket">
+<em class="property">class </em><code class="descclassname">pyknp.juman.juman.</code><code class="descname">Socket</code><span class="sig-paren">(</span><em>hostname</em>, <em>port</em>, <em>option=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pyknp.juman.juman.Socket" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="pyknp.juman.juman.Socket.query">
+<code class="descname">query</code><span class="sig-paren">(</span><em>sentence</em>, <em>pattern</em><span class="sig-paren">)</span><a class="headerlink" href="#pyknp.juman.juman.Socket.query" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="pyknp.juman.juman.Subprocess">
+<em class="property">class </em><code class="descclassname">pyknp.juman.juman.</code><code class="descname">Subprocess</code><span class="sig-paren">(</span><em>command</em><span class="sig-paren">)</span><a class="headerlink" href="#pyknp.juman.juman.Subprocess" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="pyknp.juman.juman.Subprocess.query">
+<code class="descname">query</code><span class="sig-paren">(</span><em>sentence</em>, <em>pattern</em><span class="sig-paren">)</span><a class="headerlink" href="#pyknp.juman.juman.Subprocess.query" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-pyknp.juman.jumanpp">
+<span id="pyknp-juman-jumanpp-module"></span><h2>pyknp.juman.jumanpp module<a class="headerlink" href="#module-pyknp.juman.jumanpp" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="pyknp.juman.jumanpp.Jumanpp">
+<em class="property">class </em><code class="descclassname">pyknp.juman.jumanpp.</code><code class="descname">Jumanpp</code><span class="sig-paren">(</span><em>command='jumanpp'</em>, <em>timeout=30</em>, <em>option=''</em>, <em>pattern='EOS'</em><span class="sig-paren">)</span><a class="headerlink" href="#pyknp.juman.jumanpp.Jumanpp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>形態素解析器 JUMAN++ を Python から利用するためのモジュールである．</p>
+<dl class="method">
+<dt id="pyknp.juman.jumanpp.Jumanpp.analysis">
+<code class="descname">analysis</code><span class="sig-paren">(</span><em>input_str</em><span class="sig-paren">)</span><a class="headerlink" href="#pyknp.juman.jumanpp.Jumanpp.analysis" title="Permalink to this definition">¶</a></dt>
+<dd><p>指定された文字列 input_str を形態素解析し，その結果を MList オブジェクトとして返す．</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyknp.juman.jumanpp.Jumanpp.juman">
+<code class="descname">juman</code><span class="sig-paren">(</span><em>input_str</em><span class="sig-paren">)</span><a class="headerlink" href="#pyknp.juman.jumanpp.Jumanpp.juman" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pyknp.juman.jumanpp.Jumanpp.juman_lines">
+<code class="descname">juman_lines</code><span class="sig-paren">(</span><em>input_str</em><span class="sig-paren">)</span><a class="headerlink" href="#pyknp.juman.jumanpp.Jumanpp.juman_lines" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pyknp.juman.jumanpp.Jumanpp.jumanpp">
+<code class="descname">jumanpp</code><span class="sig-paren">(</span><em>input_str</em><span class="sig-paren">)</span><a class="headerlink" href="#pyknp.juman.jumanpp.Jumanpp.jumanpp" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pyknp.juman.jumanpp.Jumanpp.jumanpp_lines">
+<code class="descname">jumanpp_lines</code><span class="sig-paren">(</span><em>input_str</em><span class="sig-paren">)</span><a class="headerlink" href="#pyknp.juman.jumanpp.Jumanpp.jumanpp_lines" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pyknp.juman.jumanpp.Jumanpp.result">
+<code class="descname">result</code><span class="sig-paren">(</span><em>input_str</em><span class="sig-paren">)</span><a class="headerlink" href="#pyknp.juman.jumanpp.Jumanpp.result" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="pyknp.juman.jumanpp.JumanppTest">
+<em class="property">class </em><code class="descclassname">pyknp.juman.jumanpp.</code><code class="descname">JumanppTest</code><span class="sig-paren">(</span><em>methodName='runTest'</em><span class="sig-paren">)</span><a class="headerlink" href="#pyknp.juman.jumanpp.JumanppTest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">unittest.case.TestCase</span></code></p>
+<dl class="method">
+<dt id="pyknp.juman.jumanpp.JumanppTest.setUp">
+<code class="descname">setUp</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyknp.juman.jumanpp.JumanppTest.setUp" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pyknp.juman.jumanpp.JumanppTest.test_nominalization">
+<code class="descname">test_nominalization</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyknp.juman.jumanpp.JumanppTest.test_nominalization" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pyknp.juman.jumanpp.JumanppTest.test_normal">
+<code class="descname">test_normal</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyknp.juman.jumanpp.JumanppTest.test_normal" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pyknp.juman.jumanpp.JumanppTest.test_whitespace">
+<code class="descname">test_whitespace</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyknp.juman.jumanpp.JumanppTest.test_whitespace" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-pyknp.juman.mlist">
+<span id="pyknp-juman-mlist-module"></span><h2>pyknp.juman.mlist module<a class="headerlink" href="#module-pyknp.juman.mlist" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="pyknp.juman.mlist.MList">
+<em class="property">class </em><code class="descclassname">pyknp.juman.mlist.</code><code class="descname">MList</code><span class="sig-paren">(</span><em>spec=''</em><span class="sig-paren">)</span><a class="headerlink" href="#pyknp.juman.mlist.MList" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>形態素列を保持するオブジェクト．</p>
+<dl class="method">
+<dt id="pyknp.juman.mlist.MList.mrph_list">
+<code class="descname">mrph_list</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyknp.juman.mlist.MList.mrph_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>全ての形態素のリストを返す．</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyknp.juman.mlist.MList.new_spec">
+<code class="descname">new_spec</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyknp.juman.mlist.MList.new_spec" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pyknp.juman.mlist.MList.push_mrph">
+<code class="descname">push_mrph</code><span class="sig-paren">(</span><em>mrph</em><span class="sig-paren">)</span><a class="headerlink" href="#pyknp.juman.mlist.MList.push_mrph" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pyknp.juman.mlist.MList.set_readonly">
+<code class="descname">set_readonly</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyknp.juman.mlist.MList.set_readonly" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pyknp.juman.mlist.MList.spec">
+<code class="descname">spec</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyknp.juman.mlist.MList.spec" title="Permalink to this definition">¶</a></dt>
+<dd><p>形態素列の全文字列を返す．Juman による出力と同じ形式の結果が得られる．</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="pyknp.juman.mlist.MListTest">
+<em class="property">class </em><code class="descclassname">pyknp.juman.mlist.</code><code class="descname">MListTest</code><span class="sig-paren">(</span><em>methodName='runTest'</em><span class="sig-paren">)</span><a class="headerlink" href="#pyknp.juman.mlist.MListTest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">unittest.case.TestCase</span></code></p>
+<dl class="method">
+<dt id="pyknp.juman.mlist.MListTest.setUp">
+<code class="descname">setUp</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyknp.juman.mlist.MListTest.setUp" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pyknp.juman.mlist.MListTest.test_doukei">
+<code class="descname">test_doukei</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyknp.juman.mlist.MListTest.test_doukei" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pyknp.juman.mlist.MListTest.test_mrph">
+<code class="descname">test_mrph</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyknp.juman.mlist.MListTest.test_mrph" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pyknp.juman.mlist.MListTest.test_mrph_list">
+<code class="descname">test_mrph_list</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyknp.juman.mlist.MListTest.test_mrph_list" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-pyknp.juman.morpheme">
+<span id="pyknp-juman-morpheme-module"></span><h2>pyknp.juman.morpheme module<a class="headerlink" href="#module-pyknp.juman.morpheme" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="pyknp.juman.morpheme.Morpheme">
+<em class="property">class </em><code class="descclassname">pyknp.juman.morpheme.</code><code class="descname">Morpheme</code><span class="sig-paren">(</span><em>spec</em>, <em>mrph_id=None</em>, <em>newstyle=False</em><span class="sig-paren">)</span><a class="headerlink" href="#pyknp.juman.morpheme.Morpheme" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>形態素の各種情報を保持するオブジェクト．</p>
+<dl class="method">
+<dt id="pyknp.juman.morpheme.Morpheme.new_spec">
+<code class="descname">new_spec</code><span class="sig-paren">(</span><em>prev_mrph_id=None</em>, <em>span=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pyknp.juman.morpheme.Morpheme.new_spec" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pyknp.juman.morpheme.Morpheme.parse_fstring">
+<code class="descname">parse_fstring</code><span class="sig-paren">(</span><em>fstring</em><span class="sig-paren">)</span><a class="headerlink" href="#pyknp.juman.morpheme.Morpheme.parse_fstring" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pyknp.juman.morpheme.Morpheme.push_doukei">
+<code class="descname">push_doukei</code><span class="sig-paren">(</span><em>mrph</em><span class="sig-paren">)</span><a class="headerlink" href="#pyknp.juman.morpheme.Morpheme.push_doukei" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pyknp.juman.morpheme.Morpheme.repnames">
+<code class="descname">repnames</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyknp.juman.morpheme.Morpheme.repnames" title="Permalink to this definition">¶</a></dt>
+<dd><p>形態素の代表表記（曖昧性がある場合は「?」で連結）を返す．</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyknp.juman.morpheme.Morpheme.spec">
+<code class="descname">spec</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyknp.juman.morpheme.Morpheme.spec" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="pyknp.juman.morpheme.MorphemeTest">
+<em class="property">class </em><code class="descclassname">pyknp.juman.morpheme.</code><code class="descname">MorphemeTest</code><span class="sig-paren">(</span><em>methodName='runTest'</em><span class="sig-paren">)</span><a class="headerlink" href="#pyknp.juman.morpheme.MorphemeTest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">unittest.case.TestCase</span></code></p>
+<dl class="method">
+<dt id="pyknp.juman.morpheme.MorphemeTest.test_at">
+<code class="descname">test_at</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyknp.juman.morpheme.MorphemeTest.test_at" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pyknp.juman.morpheme.MorphemeTest.test_imis">
+<code class="descname">test_imis</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyknp.juman.morpheme.MorphemeTest.test_imis" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pyknp.juman.morpheme.MorphemeTest.test_knp">
+<code class="descname">test_knp</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyknp.juman.morpheme.MorphemeTest.test_knp" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pyknp.juman.morpheme.MorphemeTest.test_nil">
+<code class="descname">test_nil</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyknp.juman.morpheme.MorphemeTest.test_nil" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pyknp.juman.morpheme.MorphemeTest.test_simple">
+<code class="descname">test_simple</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyknp.juman.morpheme.MorphemeTest.test_simple" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="pyknp.juman.morpheme.MorphemeTest2">
+<em class="property">class </em><code class="descclassname">pyknp.juman.morpheme.</code><code class="descname">MorphemeTest2</code><span class="sig-paren">(</span><em>methodName='runTest'</em><span class="sig-paren">)</span><a class="headerlink" href="#pyknp.juman.morpheme.MorphemeTest2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">unittest.case.TestCase</span></code></p>
+<dl class="method">
+<dt id="pyknp.juman.morpheme.MorphemeTest2.test_doukei">
+<code class="descname">test_doukei</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyknp.juman.morpheme.MorphemeTest2.test_doukei" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pyknp.juman.morpheme.MorphemeTest2.test_simple">
+<code class="descname">test_simple</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyknp.juman.morpheme.MorphemeTest2.test_simple" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-pyknp.juman.simple">
+<span id="pyknp-juman-simple-module"></span><h2>pyknp.juman.simple module<a class="headerlink" href="#module-pyknp.juman.simple" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="pyknp.juman.simple.SimpleTest">
+<em class="property">class </em><code class="descclassname">pyknp.juman.simple.</code><code class="descname">SimpleTest</code><span class="sig-paren">(</span><em>methodName='runTest'</em><span class="sig-paren">)</span><a class="headerlink" href="#pyknp.juman.simple.SimpleTest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">unittest.case.TestCase</span></code></p>
+<dl class="method">
+<dt id="pyknp.juman.simple.SimpleTest.test">
+<code class="descname">test</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyknp.juman.simple.SimpleTest.test" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="pyknp.juman.simple.juman">
+<code class="descclassname">pyknp.juman.simple.</code><code class="descname">juman</code><span class="sig-paren">(</span><em>input_str</em><span class="sig-paren">)</span><a class="headerlink" href="#pyknp.juman.simple.juman" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-pyknp.juman">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-pyknp.juman" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">pyknp.juman package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-pyknp.juman.juman">pyknp.juman.juman module</a></li>
+<li><a class="reference internal" href="#module-pyknp.juman.jumanpp">pyknp.juman.jumanpp module</a></li>
+<li><a class="reference internal" href="#module-pyknp.juman.mlist">pyknp.juman.mlist module</a></li>
+<li><a class="reference internal" href="#module-pyknp.juman.morpheme">pyknp.juman.morpheme module</a></li>
+<li><a class="reference internal" href="#module-pyknp.juman.simple">pyknp.juman.simple module</a></li>
+<li><a class="reference internal" href="#module-pyknp.juman">Module contents</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="pyknp.html">pyknp package</a><ul>
+      <li>Previous: <a href="pyknp.evaluate.html" title="previous chapter">pyknp.evaluate package</a></li>
+      <li>Next: <a href="pyknp.knp.html" title="next chapter">pyknp.knp package</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/pyknp.juman.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, Author.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/pyknp.juman.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

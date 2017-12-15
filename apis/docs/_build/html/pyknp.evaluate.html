@@ -1,0 +1,190 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>pyknp.evaluate package &#8212; pyknp  documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="pyknp.juman package" href="pyknp.juman.html" />
+    <link rel="prev" title="pyknp package" href="pyknp.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="pyknp-evaluate-package">
+<h1>pyknp.evaluate package<a class="headerlink" href="#pyknp-evaluate-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-pyknp.evaluate.dep">
+<span id="pyknp-evaluate-dep-module"></span><h2>pyknp.evaluate.dep module<a class="headerlink" href="#module-pyknp.evaluate.dep" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="pyknp.evaluate.dep.dependency">
+<code class="descclassname">pyknp.evaluate.dep.</code><code class="descname">dependency</code><span class="sig-paren">(</span><em>g</em>, <em>s</em>, <em>level=2</em>, <em>checkType=False</em>, <em>ignoreStart=True</em><span class="sig-paren">)</span><a class="headerlink" href="#pyknp.evaluate.dep.dependency" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-pyknp.evaluate.mrph">
+<span id="pyknp-evaluate-mrph-module"></span><h2>pyknp.evaluate.mrph module<a class="headerlink" href="#module-pyknp.evaluate.mrph" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="pyknp.evaluate.mrph.morpheme">
+<code class="descclassname">pyknp.evaluate.mrph.</code><code class="descname">morpheme</code><span class="sig-paren">(</span><em>g</em>, <em>s</em>, <em>level</em><span class="sig-paren">)</span><a class="headerlink" href="#pyknp.evaluate.mrph.morpheme" title="Permalink to this definition">¶</a></dt>
+<dd><p>level=0: segmentation のみ評価
+level=1: segmentation+品詞大分類 の評価
+level=2: segmentation+品詞大分類+{品詞細分類，原形，活用型，活用形} の評価</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-pyknp.evaluate.phrase">
+<span id="pyknp-evaluate-phrase-module"></span><h2>pyknp.evaluate.phrase module<a class="headerlink" href="#module-pyknp.evaluate.phrase" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="pyknp.evaluate.phrase.phrase">
+<code class="descclassname">pyknp.evaluate.phrase.</code><code class="descname">phrase</code><span class="sig-paren">(</span><em>g</em>, <em>s</em>, <em>level=0</em><span class="sig-paren">)</span><a class="headerlink" href="#pyknp.evaluate.phrase.phrase" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-pyknp.evaluate.scorer">
+<span id="pyknp-evaluate-scorer-module"></span><h2>pyknp.evaluate.scorer module<a class="headerlink" href="#module-pyknp.evaluate.scorer" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="pyknp.evaluate.scorer.Scorer">
+<em class="property">class </em><code class="descclassname">pyknp.evaluate.scorer.</code><code class="descname">Scorer</code><span class="sig-paren">(</span><em>fp=0</em>, <em>fn=0</em>, <em>tp=0</em>, <em>tn=0</em><span class="sig-paren">)</span><a class="headerlink" href="#pyknp.evaluate.scorer.Scorer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="pyknp.evaluate.scorer.Scorer.accuracy">
+<code class="descname">accuracy</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyknp.evaluate.scorer.Scorer.accuracy" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pyknp.evaluate.scorer.Scorer.add">
+<code class="descname">add</code><span class="sig-paren">(</span><em>sc</em><span class="sig-paren">)</span><a class="headerlink" href="#pyknp.evaluate.scorer.Scorer.add" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pyknp.evaluate.scorer.Scorer.f_measure">
+<code class="descname">f_measure</code><span class="sig-paren">(</span><em>beta=1.0</em><span class="sig-paren">)</span><a class="headerlink" href="#pyknp.evaluate.scorer.Scorer.f_measure" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pyknp.evaluate.scorer.Scorer.getDict">
+<code class="descname">getDict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyknp.evaluate.scorer.Scorer.getDict" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pyknp.evaluate.scorer.Scorer.getTotal">
+<code class="descname">getTotal</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyknp.evaluate.scorer.Scorer.getTotal" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pyknp.evaluate.scorer.Scorer.precision">
+<code class="descname">precision</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyknp.evaluate.scorer.Scorer.precision" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pyknp.evaluate.scorer.Scorer.recall">
+<code class="descname">recall</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyknp.evaluate.scorer.Scorer.recall" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-pyknp.evaluate">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-pyknp.evaluate" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">pyknp.evaluate package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-pyknp.evaluate.dep">pyknp.evaluate.dep module</a></li>
+<li><a class="reference internal" href="#module-pyknp.evaluate.mrph">pyknp.evaluate.mrph module</a></li>
+<li><a class="reference internal" href="#module-pyknp.evaluate.phrase">pyknp.evaluate.phrase module</a></li>
+<li><a class="reference internal" href="#module-pyknp.evaluate.scorer">pyknp.evaluate.scorer module</a></li>
+<li><a class="reference internal" href="#module-pyknp.evaluate">Module contents</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="pyknp.html">pyknp package</a><ul>
+      <li>Previous: <a href="pyknp.html" title="previous chapter">pyknp package</a></li>
+      <li>Next: <a href="pyknp.juman.html" title="next chapter">pyknp.juman package</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/pyknp.evaluate.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, Author.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/pyknp.evaluate.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

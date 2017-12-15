@@ -32,9 +32,15 @@ def test_juman(line):
               % (mrph.midasi, mrph.yomi, mrph.genkei, mrph.hinsi, mrph.bunrui, mrph.katuyou1, mrph.katuyou2, mrph.imis, mrph.repname))
 
 
+def simple_juman():
+    juman = pyknp.KNP()
+    print(juman)
+
+
 if __name__ == '__main__':
-    line = '太郎は花子が読んでいる本を次郎に渡した'
-    tuples = select_dependency_structure(line)
-    test_juman(line)
-    for t in tuples:
-        print(t[0] + ' => ' + t[1])
+    simple_juman()
+    # line = '太郎は花子が読んでいる本を次郎に渡した'
+    # tuples = select_dependency_structure(line)
+    # test_juman(line)
+    # for t in tuples:
+        # print(t[0] + ' => ' + t[1])
