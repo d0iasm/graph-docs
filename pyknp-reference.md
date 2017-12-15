@@ -6,30 +6,30 @@ Download from [here](http://nlp.ist.i.kyoto-u.ac.jp/index.php?PyKNP).
 pyknp/  
   ├ __init__.py  
 　├ evaluate/  
-  │  ├ __init__.py  
-  │  ├ dep.py  
-  │  ├ mrph.py  
-  │  ├ pharase.py  
+　│　├ __init__.py  
+　│　├ dep.py  
+　│　├ mrph.py  
+　│　├ pharase.py  
 　│　└ scorer.py  
-  ├ juman/  
-  │  ├ __init__.py  
-  │  ├ jumanapp.py  
-  │  ├ juman.py  
-  │  ├ mlist.py  
-  │  ├ morpheme.py  
+　├ juman/  
+　│　├ __init__.py  
+　│　├ jumanapp.py  
+　│　├ juman.py  
+　│　├ mlist.py  
+　│　├ morpheme.py  
 　│　└ simple.py  
-  ├ knp/  
-  │  ├ __init__.py  
-  │  ├ blist.py  
-  │  ├ bunsetsu.py  
-  │  ├ drawtree.py  
-  │  ├ features.py  
-  │  ├ knp.py  
-  │  ├ pas.py  
-  │  ├ rel.py  
-  │  ├ simple.py  
-  │  ├ syngraph.py  
-  │  ├ tag.py  
+　├ knp/  
+　│　├ __init__.py  
+　│　├ blist.py  
+　│　├ bunsetsu.py  
+　│　├ drawtree.py  
+　│　├ features.py  
+　│　├ knp.py  
+　│　├ pas.py  
+　│　├ rel.py  
+　│　├ simple.py  
+　│　├ syngraph.py  
+　│　├ tag.py  
 　│　└ tlist.py  
 　└ scripts/  
      └ knp-drawtree  
