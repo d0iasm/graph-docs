@@ -9,6 +9,17 @@ def find_original_word(bunsetsu):
     return bunsetsu.mrph_list()[0].genkei
 
 
+def find_nodes(line):
+    knp = pyknp.KNP()
+    result = knp.parse(line)
+    bnst_list = result.bnst_list()
+    nodes = []
+    for bnst in bnst_list:
+        nodes.append(find_original_word(bnst))
+
+    return nodes
+
+
 def find_parent_child(line):
     knp = pyknp.KNP()
     result = knp.parse(line)
