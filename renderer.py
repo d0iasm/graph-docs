@@ -24,7 +24,11 @@ class Renderer(object):
         for node in parser.find_nodes(line):
             self.dot.node(str(node), str(node))
 
+    def copy(self, src, dest):
+        subprocess.call(['cp', src, dest])
+
     def render_from_dot(self, src, img):
+        # TODO: Remove view=True
         graphviz.Source(open(src, 'r').read(), format='png').render(img, view=True)
 
     def merge(self, old, new, out):
@@ -58,6 +62,7 @@ if __name__ == '__main__':
     result = 'dest/result'
     line = input('> ')
     r = Renderer()
+    r.copy(merge, old)
     r.add_nodes(line)
     r.add_edges(line)
     r.save(new)
