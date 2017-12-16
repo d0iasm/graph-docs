@@ -13,4 +13,4 @@ def listen_func(message, content):
     if count >= 2:
         message.reply('Create a graph from the following text \n```' + text + '```')
         count = 0
-        text = 0
+        text = ''
