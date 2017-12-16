@@ -7,6 +7,10 @@ import parser
 class Renderer(object):
     """Image renderer from natural language. """
     def __init__(self):
+        self.old = 'dest/old.dot'
+        self.new = 'dest/new.dot'
+        self.merge = 'dest/merge.dot'
+        self.result = 'dest/result'
         self.dot = graphviz.Digraph(format='png')
         self.dot.attr('node', shape='circle')
 
