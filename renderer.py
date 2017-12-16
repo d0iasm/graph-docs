@@ -1,12 +1,7 @@
 import graphviz
 import subprocess
-import sys
 
 import parser
-
-
-# Merge .dot files command
-# gvpack -u old.dot new.dot | sed 's/_gv[0-9]\+//g' | dot -Tpng -o result.png
 
 
 class Renderer(object):
@@ -21,7 +16,7 @@ class Renderer(object):
     def add_node(self, name, label=None):
         self.dot.node(name, label)
 
-    def merge(self, old, new, output):
+    def merge(self, old, new, out):
         # cmd = 'gvpack -u old.dot new.dot | sed \'s/_gv[0-9]\+//g\' | dot -Tpng -o result.png'
         # res = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE)
 
@@ -32,15 +27,14 @@ class Renderer(object):
                                stdin=gvpack.stdout,
                                stdout=subprocess.PIPE)
 
-        with open(output, 'wb+') as outstream:
-            ps = subprocess.Popen(['dot', '-Tpng'],
+        with open(out, 'wb') as outstream:
+            ps = subprocess.Popen(['dot'],
                                   stdin=sed.stdout,
                                   stdout=outstream)
             ps.wait()
 
-
-    def read_raw(self, raw_dot):
-        graphviz.Source.from_file(raw_dot).save(filename='r.dot')
+    def create_img(self, src, img):
+        graphviz.Source(open(src, 'r').read(), format='png').render(img, view=True)
 
     def output(self):
         print(self.dot)
@@ -65,4 +59,5 @@ if __name__ == '__main__':
     r.output()
     r.render('new.dot')
 
-    r.merge('old.dot', 'new.dot', 'result.png')
+    r.merge('old.dot', 'new.dot', 'merge.dot')
+    r.create_img('merge.dot', 'result')
