@@ -13,8 +13,19 @@ class Renderer(object):
     def add_edge(self, child, parent):
         self.dot.edge(child, parent)
 
+    def add_edges(self, line):
+        for child, parent in parser.find_parent_child(line):
+            self.dot.edge(child, parent)
+
     def add_node(self, name, label=None):
         self.dot.node(name, label)
+
+    def add_nodes(self, line):
+        for node in parser.find_nodes(line):
+            self.dot.node(str(node), str(node))
+
+    def render_from_dot(self, src, img):
+        graphviz.Source(open(src, 'r').read(), format='png').render(img, view=True)
 
     def merge(self, old, new, out):
         # cmd = 'gvpack -u old.dot new.dot | sed \'s/_gv[0-9]\+//g\' | dot -Tpng -o result.png'
@@ -33,31 +44,22 @@ class Renderer(object):
                                   stdout=outstream)
             ps.wait()
 
-    def create_img(self, src, img):
-        graphviz.Source(open(src, 'r').read(), format='png').render(img, view=True)
-
-    def output(self):
-        print(self.dot)
-
-    def render(self, name):
-        self.dot.render(name, view=True)
+    def save(self, name):
+        self.dot.save(filename=name)
 
     def update_shape(self, shape):
         self.dot.attr('node', shape=shape)
 
 
 if __name__ == '__main__':
+    old = 'dest/old.dot'
+    new = 'dest/new.dot'
+    merge = 'dest/merge.dot'
+    result = 'dest/result'
+    line = input('> ')
     r = Renderer()
-
-    line = '太郎は花子が読んでいる本を次郎に渡した。'
-    for n in parser.find_nodes(line):
-        r.add_node(str(n), str(n))
-
-    for t in parser.find_parent_child(line):
-        r.add_edge(t[0], t[1])
-
-    r.output()
-    r.render('new.dot')
-
-    r.merge('old.dot', 'new.dot', 'merge.dot')
-    r.create_img('merge.dot', 'result')
+    r.add_nodes(line)
+    r.add_edges(line)
+    r.save(new)
+    r.merge(old, new, merge)
+    r.render_from_dot(merge, result)
