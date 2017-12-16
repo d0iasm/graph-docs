@@ -1,16 +1,16 @@
 import graphviz
 import subprocess
 
-import parser
+from . import parser
 
 
 class Renderer(object):
     """Image renderer from natural language. """
     def __init__(self):
-        self.old = 'dest/old.dot'
-        self.new = 'dest/new.dot'
-        self.merge = 'dest/merge.dot'
-        self.result = 'dest/result'
+        # self.old = 'dest/old.dot'
+        # self.new = 'dest/new.dot'
+        # self.merge = 'dest/merge.dot'
+        # self.result = 'dest/result'
         self.dot = graphviz.Digraph(format='png')
         self.dot.attr('node', shape='circle')
 
@@ -47,14 +47,13 @@ class Renderer(object):
         :param string src: a file name in a source.
         :param string dest: a file name in a destination.
         """
-        subprocess.call(['cp', src, dest])
+        subprocess.call(['cp', '-f', src, dest])
 
     def render_from_dot(self, src, img):
         """
         :param string src: a dot file name in a source.
         :param string img: an image file name in a destination.
         """
-        # TODO: Remove view=True
         graphviz.Source(open(src, 'r').read(), format='png').render(img, view=True)
 
     def merge(self, old, new, out):
@@ -73,7 +72,7 @@ class Renderer(object):
                                stdin=gvpack.stdout,
                                stdout=subprocess.PIPE)
 
-        with open(out, 'wb') as outstream:
+        with open(out, 'wb+') as outstream:
             ps = subprocess.Popen(['dot'],
                                   stdin=sed.stdout,
                                   stdout=outstream)
@@ -90,10 +89,10 @@ class Renderer(object):
 
 
 if __name__ == '__main__':
-    old = 'dest/old.dot'
-    new = 'dest/new.dot'
-    merge = 'dest/merge.dot'
-    result = 'dest/result'
+    old = '../dest/old.dot'
+    new = '../dest/new.dot'
+    merge = '../dest/merge.dot'
+    result = '../dest/result'
     line = input('> ')
     r = Renderer()
     r.copy(merge, old)
