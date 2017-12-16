@@ -1,0 +1,10 @@
+digraph {
+	node [shape=circle]
+	"太郎" [label="太郎"]
+	"猫" [label="猫"]
+	"犬" [label="犬"]
+	"飼う" [label="飼う"]
+	"太郎" -> "飼う"
+	"猫" -> "犬"
+	"犬" -> "飼う"
+}

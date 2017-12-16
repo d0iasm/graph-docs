@@ -3,42 +3,39 @@ import graphviz
 import parser
 
 
+# Merge .dot files command
+# gvpack -u result result2 | sed 's/_gv[0-9]\+//g' | dot -Tjpg -o gvsub.jpg
+
+
 class Renderer(object):
     """Image renderer from natural language. """
     def __init__(self):
-        self.graph = graphviz.Digraph(format='png')
-        self.graph.attr('node', shape='circle')
-
-    def update_shape(self, shape):
-        self.graph.attr('node', shape=shape)
-
-    def add_node(self, name, label=None):
-        self.graph.node(name, label)
+        self.dot = graphviz.Digraph(format='png')
+        self.dot.attr('node', shape='circle')
 
     def add_edge(self, child, parent):
-        self.graph.edge(child, parent)
+        self.dot.edge(child, parent)
+
+    def add_node(self, name, label=None):
+        self.dot.node(name, label)
 
     def output(self):
-        print(self.graph)
+        print(self.dot)
+
+    def read_dot(self, raw_dot):
+        return graphviz.Source.from_file(raw_dot)
 
     def render(self):
-        self.graph.render('result')
+        self.dot.render('result2', view=True)
 
-       
+    def update_shape(self, shape):
+        self.dot.attr('node', shape=shape)
+
+
 if __name__ == '__main__':
     r = Renderer()
-    # n = 15
-    # for i in range(n):
-        # g.add_node(str(i), str(i))
 
-    # for i in range(n):
-        # if(i - 1) // 2 >= 0:
-            # g.add_edge(str((i-1)//2), str(i))
-
-    # g.output()
-    # g.render()
-
-    line = '太郎は花子が読んでいる本を次郎に渡した'
+    line = '太郎は猫と犬を飼っている。'
     for n in parser.find_nodes(line):
         r.add_node(str(n), str(n))
 
