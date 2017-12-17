@@ -1,9 +1,9 @@
 import sys
 import os
 import logging
-print(sys.path)
-logging.error(sys.path)
-sys.path.append('/plugins/pyknp')
+
+if '/app/plugins/pyknp' not in sys.path:
+    sys.path.append('/app/plugins/pyknp')
 logging.error(sys.path)
 logging.error(os.getcwd())
 logging.error(os.path.abspath(__file__))
