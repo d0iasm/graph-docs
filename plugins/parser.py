@@ -1,4 +1,4 @@
-from pyknp.pyknp import KNP
+from . import pyknp
 
 
 def find_original_word(bunsetsu):
@@ -10,8 +10,7 @@ def find_original_word(bunsetsu):
 
 
 def find_nodes(line):
-    knp = KNP()
-    # knp = pyknp.KNP()
+    knp = pyknp.KNP()
     result = knp.parse(line)
     bnst_list = result.bnst_list()
     nodes = []
@@ -22,8 +21,7 @@ def find_nodes(line):
 
 
 def find_parent_child(line):
-    knp = KNP()
-    # knp = pyknp.KNP()
+    knp = pyknp.KNP()
     result = knp.parse(line)
     bnst_list = result.bnst_list()
     bnst_dict = dict((x.bnst_id, x) for x in bnst_list)
