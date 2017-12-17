@@ -1,3 +1,4 @@
 digraph {
 	node [shape=circle]
+	hoge [label=hoge]
 }
