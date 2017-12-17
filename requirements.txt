@@ -1,0 +1,6 @@
+graphviz==0.8.1
+pydot-ng==1.0.0
+pydot3==1.0.9
+pyknp==0.3
+slackbot==0.5.1
+slacker==0.9.60
