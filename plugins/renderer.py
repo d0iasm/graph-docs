@@ -53,10 +53,13 @@ class Renderer(object):
         :param string img: an image file name in a destination.
         """
         # graphviz.Source(open(src, 'r').read(), format='png').render(img, view=True)
-        dot_string = self.s3.Object(
+        dot_data = self.s3.Object(
             self.s3_bucket, 'merge.dot').get()['Body'].read().decode('utf-8')
-        graphviz.Source(dot_string, format='png').render(img, view=True)
-        
+        # graphviz.Source(dot_data, format='png').render(img, view=True, cleanup=True)
+
+        self.s3.Object(self.s3_bucket, 'result.png').put(
+            Body=graphviz.Source(dot_data, format='png').pipe())
+
     def merge(self, old, new, out):
         """
         :param string old: a old dot file name.
