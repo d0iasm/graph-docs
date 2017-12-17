@@ -11,7 +11,10 @@ text = ''
 
 @respond_to('hoge')
 def hoge(message):
-    message.reply('HOGE')
+    attachments = [{
+        'image_url': '/app/dest/result.png',
+    }]
+    message.send_webapi('', json.dumps(attachments))
 
 
 @listen_to('(.*)')
