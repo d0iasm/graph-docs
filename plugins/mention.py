@@ -9,16 +9,11 @@ count = 0
 text = ''
 
 
-import sys
-import logging
-import os
 @respond_to('hoge')
 def hoge(message):
-    logging.error(os.path.abspath(__file__))
-    logging.error(os.getcwd())
     attachments = [{
         'text': 'fuga',
-        'image_url': 'https://placehold.jp/150x150.png',
+        'image_url': '/tmp/result.png',
     }]
     message.send_webapi('hoge', attachments=json.dumps(attachments))
 
@@ -44,7 +39,8 @@ def render(text):
     old = '/app/dest/old.dot'
     new = '/app/dest/new.dot'
     merge = '/app/dest/merge.dot'
-    result = '/app/dest/result'
+    # result = '/app/dest/result'
+    result = '/tmp/result'
     r = renderer.Renderer()
     r.copy(merge, old)
     r.add_nodes(text)
