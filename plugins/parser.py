@@ -1,12 +1,6 @@
 import sys
-import os
-import logging
-
 if '/app/plugins' not in sys.path:
     sys.path.append('/app/plugins')
-logging.error(sys.path)
-logging.error(os.getcwd())
-logging.error(os.path.abspath(__file__))
 
 import pyknp
 
@@ -20,7 +14,6 @@ def find_original_word(bunsetsu):
 
 
 def find_nodes(line):
-    # knp = KNP()
     knp = pyknp.KNP()
     result = knp.parse(line)
     bnst_list = result.bnst_list()
@@ -32,7 +25,6 @@ def find_nodes(line):
 
 
 def find_parent_child(line):
-    # knp = KNP()
     knp = pyknp.KNP()
     result = knp.parse(line)
     bnst_list = result.bnst_list()

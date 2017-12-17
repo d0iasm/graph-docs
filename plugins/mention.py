@@ -14,6 +14,7 @@ def listen_func(message, content):
     render(text)
     count += 1
     text += content
+    message.reply('Hello')
     if count >= 2:
         # message.reply('Create a graph from the following text \n```' + text + '```')
         attachments = [{
