@@ -1,12 +1,3 @@
 digraph {
 	node [shape=circle]
-	"実行" [label="実行"]
-	Bot [label=Bot]
-	"現れる" [label="現れる"]
-	"対話" [label="対話"]
-	"できる" [label="できる"]
-	"実行" -> "できる"
-	Bot -> "現れる"
-	"現れる" -> "できる"
-	"対話" -> "できる"
 }
