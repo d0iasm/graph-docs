@@ -1,4 +1,4 @@
 digraph {
 	node [shape=circle]
-	hoge [label=hoge]
+	"こんにちは" [label="こんにちは"]
 }
