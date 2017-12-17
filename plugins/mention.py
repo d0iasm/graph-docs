@@ -10,7 +10,7 @@ text = ''
 
 
 @respond_to('hoge')
-def hoge(message, content):
+def hoge(message):
     message.reply('HOGE')
 
 
