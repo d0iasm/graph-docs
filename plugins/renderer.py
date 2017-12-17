@@ -52,7 +52,10 @@ class Renderer(object):
         :param string src: a dot file name in a source.
         :param string img: an image file name in a destination.
         """
-        graphviz.Source(open(src, 'r').read(), format='png').render(img, view=True)
+        # graphviz.Source(open(src, 'r').read(), format='png').render(img, view=True)
+        dot_string = self.s3.Object(
+            self.s3_bucket, 'merge.dot').get()['Body'].read().decode('utf-8')
+        graphviz.Source(dot_string, format='png').render(img, view=True)
         
     def merge(self, old, new, out):
         """
