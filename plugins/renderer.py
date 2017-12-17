@@ -1,4 +1,6 @@
+import boto3
 import graphviz
+import os
 import subprocess
 
 from . import parser
@@ -7,12 +9,10 @@ from . import parser
 class Renderer(object):
     """Image renderer from natural language. """
     def __init__(self):
-        # self.old = 'dest/old.dot'
-        # self.new = 'dest/new.dot'
-        # self.merge = 'dest/merge.dot'
-        # self.result = 'dest/result'
         self.dot = graphviz.Digraph(format='png')
         self.dot.attr('node', shape='circle')
+        self.s3 = boto3.resource('s3')
+        self.s3_bucket = os.environ['S3_BUCKET_NAME']
 
     def add_edge(self, child, parent):
         """
@@ -43,18 +43,24 @@ class Renderer(object):
             self.dot.node(str(node), str(node))
 
     def copy(self, src, dest):
-        """
-        :param string src: a file name in a source.
-        :param string dest: a file name in a destination.
-        """
         subprocess.call(['cp', '-f', src, dest])
+        # copy_source = {
+            # 'Bucket': self.s3_bucket,
+            # 'Key': src
+        # }
+        # self.s3.meta.client.copy(copy_source, self.s3_bucket, dest)
+        self.s3.Object(self.s3_bucket, 'new.dot').copy_from(
+            CopySource={'Bucket': self.s3_bucket, 'Key': 'old.dot'})
 
     def render_from_dot(self, src, img):
         """
         :param string src: a dot file name in a source.
         :param string img: an image file name in a destination.
         """
-        graphviz.Source(open(src, 'r').read(), format='png').render(img, view=True)
+        r = graphviz.Source(open(src, 'r').read(), format='png').render(img, view=True)
+        print('----')
+        print(r)
+        print('----')
 
     def merge(self, old, new, out):
         """

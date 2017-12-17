@@ -13,8 +13,7 @@ text = ''
 def hoge(message):
     attachments = [{
         'text': 'fuga',
-        'image_url': 'https://s3-ap-northeast-1.amazonaws.com/photo-editor-bot/blur.jpg',
-        # 'image_url': 'https://s3-ap-northeast-1.amazonaws.com/graphy-bot/result.png',
+        'image_url': 'https://s3-ap-northeast-1.amazonaws.com/graphy-bot/result.png',
     }]
     message.send_webapi('hoge', attachments=json.dumps(attachments))
 
@@ -29,7 +28,7 @@ def listen_func(message, content):
         # message.reply('Create a graph from the following text \n```' + text + '```')
         attachments = [{
             'text': 'Create a graph from the following text\n' + text,
-            'image_url': '/app/dest/result.png',
+            'image_url': 'https://s3-ap-northeast-1.amazonaws.com/graphy-bot/result.png',
         }]
         message.send_webapi('hoge', attachments=json.dumps(attachments))
         count = 0
@@ -37,11 +36,11 @@ def listen_func(message, content):
 
 
 def render(text):
-    old = '/app/dest/old.dot'
-    new = '/app/dest/new.dot'
-    merge = '/app/dest/merge.dot'
+    old = './dest/old.dot'
+    new = './dest/new.dot'
+    merge = './dest/merge.dot'
     # result = '/app/dest/result'
-    result = '/tmp/result'
+    result = './dest/result'
     r = renderer.Renderer()
     r.copy(merge, old)
     r.add_nodes(text)
