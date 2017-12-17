@@ -22,6 +22,7 @@ def hoge(message):
 def listen_func(message, content):
     global count, text
     render(text)
+    print(text)
     count += 1
     text += content
     if count >= 2:

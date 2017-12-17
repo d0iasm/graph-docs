@@ -44,24 +44,16 @@ class Renderer(object):
 
     def copy(self, src, dest):
         subprocess.call(['cp', '-f', src, dest])
-        # copy_source = {
-            # 'Bucket': self.s3_bucket,
-            # 'Key': src
-        # }
-        # self.s3.meta.client.copy(copy_source, self.s3_bucket, dest)
-        self.s3.Object(self.s3_bucket, 'new.dot').copy_from(
-            CopySource={'Bucket': self.s3_bucket, 'Key': 'old.dot'})
+        self.s3.Object(self.s3_bucket, 'old.dot').copy_from(
+            CopySource={'Bucket': self.s3_bucket, 'Key': 'merge.dot'})
 
     def render_from_dot(self, src, img):
         """
         :param string src: a dot file name in a source.
         :param string img: an image file name in a destination.
         """
-        r = graphviz.Source(open(src, 'r').read(), format='png').render(img, view=True)
-        print('----')
-        print(r)
-        print('----')
-
+        graphviz.Source(open(src, 'r').read(), format='png').render(img, view=True)
+        
     def merge(self, old, new, out):
         """
         :param string old: a old dot file name.
@@ -89,6 +81,9 @@ class Renderer(object):
         :param string name: a file name.
         """
         self.dot.save(filename=name)
+
+        self.s3.Object(self.s3_bucket, 'new.dot').put(
+            Body=self.dot.source.encode('UTF-8'))
 
     def update_shape(self, shape):
         self.dot.attr('node', shape=shape)

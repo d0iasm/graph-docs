@@ -1,8 +1,30 @@
 digraph root {
-	graph [bb="0,0,158.15,56"];
+	graph [bb="0,0,310.39,152.99"];
 	node [label="\N"];
+	{
+		node [label="\N",
+			shape=circle
+		];
+		今日		 [height=0.81243,
+			label=今日,
+			pos="29.247,123.74",
+			shape=circle,
+			width=0.81243];
+		天気		 [height=0.81243,
+			label=天気,
+			pos="67.247,29.247",
+			shape=circle,
+			width=0.81243];
+		今日 -> 天気		 [pos="e,56.433,56.571 40.035,96.484 43.926,87.013 48.386,76.157 52.554,66.012"];
+		いい		 [height=0.81243,
+			label=いい,
+			pos="105.25,123.74",
+			shape=circle,
+			width=0.81243];
+		いい -> 天気		 [pos="e,78.062,56.571 94.46,96.484 90.569,87.013 86.109,76.157 81.941,66.012"];
+	}
 	subgraph root {
-		graph [bb="0,0,158.09,55.895"];
+		graph [bb="0,0,158.15,56"];
 		node [height="",
 			label="\N",
 			pos="",
@@ -10,23 +32,8 @@ digraph root {
 			width=""
 		];
 		edge [pos=""];
-		{
-			graph [bb="0,0,158.09,55.895"];
-			node [height="",
-				label="\N",
-				pos="",
-				shape=circle,
-				width=""
-			];
-			edge [pos=""];
-			hoge			 [height=0.77778,
-				label=hoge,
-				pos="28,28",
-				shape=circle,
-				width=0.77778];
-		}
 		subgraph root {
-			graph [bb="0,0,84.294,36"];
+			graph [bb="0,0,158.15,56"];
 			node [height="",
 				label="\N",
 				pos="",
@@ -35,7 +42,7 @@ digraph root {
 			];
 			edge [pos=""];
 			subgraph root {
-				graph [bb="0,0,84.294,36"];
+				graph [bb="0,0,158.15,56"];
 				node [height="",
 					label="\N",
 					pos="",
@@ -44,7 +51,7 @@ digraph root {
 				];
 				edge [pos=""];
 				subgraph root {
-					graph [bb="0,0,84.294,36"];
+					graph [bb="0,0,158.15,56"];
 					node [height="",
 						label="\N",
 						pos="",
@@ -52,10 +59,115 @@ digraph root {
 						width=""
 					];
 					edge [pos=""];
-					merge					 [height=0.5,
-						pos="107,28",
-						width=0.92075];
-					merge -> merge					 [pos="e,137.96,21.257 137.96,34.743 149.08,34.888 158.15,32.641 158.15,28 158.15,24.882 154.05,22.844 148,21.887"];
+					subgraph root {
+						graph [bb="0,0,158.15,56"];
+						node [height="",
+							label="\N",
+							pos="",
+							shape="",
+							width=""
+						];
+						edge [pos=""];
+						subgraph root {
+							graph [bb="0,0,158.15,56"];
+							node [height="",
+								label="\N",
+								pos="",
+								shape="",
+								width=""
+							];
+							edge [pos=""];
+							subgraph root {
+								graph [bb="0,0,158.15,56"];
+								node [height="",
+									label="\N",
+									pos="",
+									shape="",
+									width=""
+								];
+								edge [pos=""];
+								subgraph root {
+									graph [bb="0,0,158.15,56"];
+									node [height="",
+										label="\N",
+										pos="",
+										shape="",
+										width=""
+									];
+									edge [pos=""];
+									subgraph root {
+										graph [bb="0,0,158.15,56"];
+										node [height="",
+											label="\N",
+											pos="",
+											shape="",
+											width=""
+										];
+										edge [pos=""];
+										subgraph root {
+											graph [bb="0,0,158.09,55.895"];
+											node [height="",
+												label="\N",
+												pos="",
+												shape="",
+												width=""
+											];
+											edge [pos=""];
+											{
+												graph [bb="0,0,158.09,55.895"];
+												node [height="",
+													label="\N",
+													pos="",
+													shape=circle,
+													width=""
+												];
+												edge [pos=""];
+												hoge												 [height=0.77778,
+													label=hoge,
+													pos="180.25,123.74",
+													shape=circle,
+													width=0.77778];
+											}
+											subgraph root {
+												graph [bb="0,0,84.294,36"];
+												node [height="",
+													label="\N",
+													pos="",
+													shape="",
+													width=""
+												];
+												edge [pos=""];
+												subgraph root {
+													graph [bb="0,0,84.294,36"];
+													node [height="",
+														label="\N",
+														pos="",
+														shape="",
+														width=""
+													];
+													edge [pos=""];
+													subgraph root {
+														graph [bb="0,0,84.294,36"];
+														node [height="",
+															label="\N",
+															pos="",
+															shape="",
+															width=""
+														];
+														edge [pos=""];
+														merge														 [height=0.5,
+															pos="259.25,123.74",
+															width=0.92075];
+														merge -> merge														 [pos="e,278.13,108.81 278.13,138.68 293.91,145.06 310.39,140.08 310.39,123.74 310.39,110.85 300.13,105.03 288.05,106.28"];
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
 				}
 			}
 		}
