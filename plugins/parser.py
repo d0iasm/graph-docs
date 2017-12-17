@@ -1,9 +1,13 @@
 import sys
+import os
 import logging
 print(sys.path)
 logging.error(sys.path)
 sys.path.append('/plugins/pyknp')
 logging.error(sys.path)
+logging.error(os.getcwd())
+logging.error(os.path.abspath(__file__))
+
 import pyknp
 
 
