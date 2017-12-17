@@ -12,7 +12,8 @@ text = ''
 @respond_to('hoge')
 def hoge(message):
     attachments = [{
-        'image_url': '/app/dest/result.png',
+        'text': 'fuga',
+        'image_url': 'https://placehold.jp/150x150.png',
     }]
     message.send_webapi('hoge', attachments=json.dumps(attachments))
 
