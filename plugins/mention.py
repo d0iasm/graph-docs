@@ -14,7 +14,7 @@ def hoge(message):
     attachments = [{
         'image_url': '/app/dest/result.png',
     }]
-    message.send_webapi('', json.dumps(attachments))
+    message.send_webapi('hoge', attachments=json.dumps(attachments))
 
 
 @listen_to('(.*)')
@@ -29,7 +29,7 @@ def listen_func(message, content):
             'text': 'Create a graph from the following text\n' + text,
             'image_url': '/app/dest/result.png',
         }]
-        message.send_webapi('hoge', json.dumps(attachments))
+        message.send_webapi('hoge', attachments=json.dumps(attachments))
         count = 0
         text = ''
 
