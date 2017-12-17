@@ -1,4 +1,4 @@
-import pyknp
+from . import pyknp
 
 
 def find_original_word(bunsetsu):
