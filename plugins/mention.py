@@ -13,7 +13,7 @@ text = ''
 def hoge(message):
     attachments = [{
         'text': 'fuga',
-        'image_url': '/tmp/result.png',
+        'image_url': 'https://s3-ap-northeast-1.amazonaws.com/graphy-bot/result.png',
     }]
     message.send_webapi('hoge', attachments=json.dumps(attachments))
 
