@@ -14,7 +14,7 @@ import logging
 import os
 @respond_to('hoge')
 def hoge(message):
-    logging.error(sys.path)
+    logging.error(os.path.abspath(__file__))
     logging.error(os.getcwd())
     attachments = [{
         'text': 'fuga',
