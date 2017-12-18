@@ -3,7 +3,8 @@ import graphviz
 import os
 import subprocess
 
-from . import parser
+# from . import parser
+import parser
 
 
 class Renderer(object):
@@ -52,10 +53,9 @@ class Renderer(object):
         :param string src: a dot file name in a source.
         :param string img: an image file name in a destination.
         """
-        # graphviz.Source(open(src, 'r').read(), format='png').render(img, view=True)
+        graphviz.Source(open(src, 'r').read(), format='png').render(img, view=True, cleanup=True)
         dot_data = self.s3.Object(
             self.s3_bucket, 'merge.dot').get()['Body'].read().decode('utf-8')
-        # graphviz.Source(dot_data, format='png').render(img, view=True, cleanup=True)
 
         self.s3.Object(self.s3_bucket, 'result.png').put(
             Body=graphviz.Source(dot_data, format='png').pipe())
@@ -96,10 +96,10 @@ class Renderer(object):
 
 
 if __name__ == '__main__':
-    old = '../dest/old.dot'
-    new = '../dest/new.dot'
-    merge = '../dest/merge.dot'
-    result = '../dest/result'
+    old = './dest/old.dot'
+    new = './dest/new.dot'
+    merge = './dest/merge.dot'
+    result = './dest/result'
     line = input('> ')
     r = Renderer()
     r.copy(merge, old)

@@ -1,0 +1,30 @@
+digraph G {
+	graph[
+	      fontsize=30,
+	      size="7.75 10.25",
+	      ];
+	
+	node[
+	     fontsize=30,
+	     shape=box,
+	     margin=0.3,
+	     ];
+	user [shape=oval];
+
+	edge[
+	     ];
+	
+	user -> slack;
+	slack -> heroku [label="slack API", fontsize=30];
+	slack -> user;
+	
+
+	subgraph cluster1 {
+		label="graphy";
+		style=filled;
+		color=lightgrey;
+		heroku -> s3;
+		s3 -> heroku;
+		heroku -> slack;
+	}
+}
