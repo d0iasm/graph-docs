@@ -58,7 +58,7 @@ class Renderer(object):
         self.add_nodes(text)
         self.add_edges(text)
         self.s3.Object(self.s3_bucket, 'result.png').put(
-            Body=graphviz.Source(self.dot.source.encode('UTF-8'), format='png').pipe())
+            Body=graphviz.Source(self.dot.source, format='png').pipe())
 
     def merge(self):
         old_text = self.s3.Object(
