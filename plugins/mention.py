@@ -1,6 +1,5 @@
 import json
 from slackbot.bot import listen_to
-from slackbot.bot import respond_to
 
 from . import renderer
 
@@ -9,29 +8,18 @@ count = 0
 text = ''
 
 
-@respond_to('hoge')
-def hoge(message):
-    attachments = [{
-        'text': 'fuga',
-        'image_url': 'https://s3-ap-northeast-1.amazonaws.com/graphy-bot/result.png',
-    }]
-    message.send_webapi('hoge', attachments=json.dumps(attachments))
-
-
 @listen_to('(.*)')
 def listen_func(message, content):
     global count, text
     render(text)
-    print(text)
     count += 1
     text += content
-    if count >= 2:
-        # message.reply('Create a graph from the following text \n```' + text + '```')
+    if count >= 1:
         attachments = [{
-            'text': 'Create a graph from the following text\n' + text,
+            'text': text,
             'image_url': 'https://s3-ap-northeast-1.amazonaws.com/graphy-bot/result.png',
         }]
-        message.send_webapi('hoge', attachments=json.dumps(attachments))
+        message.send_webapi(' ', attachments=json.dumps(attachments))
         count = 0
         text = ''
 
@@ -40,7 +28,6 @@ def render(text):
     old = './dest/old.dot'
     new = './dest/new.dot'
     merge = './dest/merge.dot'
-    # result = '/app/dest/result'
     result = './dest/result'
     r = renderer.Renderer()
     r.copy(merge, old)

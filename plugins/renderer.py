@@ -3,8 +3,8 @@ import graphviz
 import os
 import subprocess
 
-# from . import parser
-import parser
+from . import parser
+# import parser
 
 
 class Renderer(object):
