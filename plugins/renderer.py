@@ -9,15 +9,18 @@ from . import parser
 
 class Renderer(object):
     """Image renderer from natural language. """
-    def __init__(self):
+    def __init__(self, new_text):
         self.dot = graphviz.Digraph(format='png')
         self.dot.attr('node', shape='circle')
+        self.new = new_text
         # TODO: Bucket policy
         self.session = boto3.session.Session(aws_access_key_id=os.environ['AWS_ACCESS_KEY_ID'],
                                              aws_secret_access_key=os.environ['AWS_SECRET_ACCESS_KEY'],
                                              region_name='ap-northeast-1')
         self.s3 = self.session.resource('s3')
         self.s3_bucket = os.environ['S3_BUCKET_NAME']
+
+        self.copy()
 
     def add_edge(self, child, parent):
         """
@@ -47,78 +50,24 @@ class Renderer(object):
         for node in parser.find_nodes(line):
             self.dot.node(str(node), str(node))
 
-    def copy(self, src, dest):
-        # subprocess.call(['cp', '-f', src, dest])
-        self.s3.Object(self.s3_bucket, 'old.dot').copy_from(
-            CopySource={'Bucket': self.s3_bucket, 'Key': 'merge.dot'})
+    def copy(self):
+        self.s3.Object(self.s3_bucket, 'old').copy_from(
+            CopySource={'Bucket': self.s3_bucket, 'Key': 'new'})
 
-    def render_from_dot(self, src, img):
-        """
-        :param string src: a dot file name in a source.
-        :param string img: an image file name in a destination.
-        """
-        # graphviz.Source(open(src, 'r').read(), format='png').render(img, view=True, cleanup=True)
-        
-        dot_data = self.s3.Object(
-            self.s3_bucket, 'merge.dot').get()['Body'].read().decode('utf-8')
-
+    def render(self, text):
+        self.add_nodes(text)
+        self.add_edges(text)
         self.s3.Object(self.s3_bucket, 'result.png').put(
-            Body=graphviz.Source(dot_data, format='png').pipe())
+            Body=graphviz.Source(self.dot.source.encode('UTF-8'), format='png').pipe())
 
-    def merge(self, old, new, out):
-        """
-        :param string old: a old dot file name.
-        :param string new: a new dot file name.
-        :param string out: a merged dot file name.
-        """
-        # cmd = 'gvpack -u old.dot new.dot | sed \'s/_gv[0-9]\+//g\' | dot -Tpng -o result.png'
-        # res = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE)
+    def merge(self):
+        old_text = self.s3.Object(
+            self.s3_bucket, 'old').get()['Body'].read().decode('utf-8')
 
-        # gvpack = subprocess.Popen(['gvpack', '-u', old, new],
-                                  # stdout=subprocess.PIPE)
+        return (old_text + self.new).strip()
 
-        # sed = subprocess.Popen(['sed', 's/_gv[0-9]\+//g'],
-                               # stdin=gvpack.stdout,
-                               # stdout=subprocess.PIPE)
-
-        # with open(out, 'wb+') as outstream:
-            # ps = subprocess.Popen(['dot'],
-                                  # stdin=sed.stdout,
-                                  # stdout=outstream)
-            # ps.wait()
-
-        old_dot = self.s3.Object(
-            self.s3_bucket, 'old.dot').get()['Body'].read().decode('utf-8')
-        
-        new_dot = self.s3.Object(
-            self.s3_bucket, 'new.dot').get()['Body'].read().decode('utf-8')
-
-        merge_dot = old_dot + "subgraph cluster { " + new_dot + "}"
-        self.s3.Object(self.s3_bucket, 'merge.dot').put(Body=merge_dot)
-        
-    def save(self, name):
-        """
-        :param string name: a file name.
-        """
-        # self.dot.save(filename=name)
-
-        self.s3.Object(self.s3_bucket, 'new.dot').put(
-            Body=self.dot.source.encode('UTF-8'))
+    def save(self, text):
+        self.s3.Object(self.s3_bucket, 'new').put(Body=text)
 
     def update_shape(self, shape):
         self.dot.attr('node', shape=shape)
-
-
-if __name__ == '__main__':
-    old = './dest/old.dot'
-    new = './dest/new.dot'
-    merge = './dest/merge.dot'
-    result = './dest/result'
-    line = input('> ')
-    r = Renderer()
-    r.copy(merge, old)
-    r.add_nodes(line)
-    r.add_edges(line)
-    r.save(new)
-    r.merge(old, new, merge)
-    r.render_from_dot(merge, result)

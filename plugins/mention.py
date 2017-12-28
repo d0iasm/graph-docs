@@ -11,10 +11,10 @@ text = ''
 @listen_to('(.*)')
 def listen_func(message, content):
     global count, text
-    render(text)
     count += 1
     text += content
     if count >= 1:
+        render(text)
         attachments = [{
             'text': text,
             'image_url': 'https://s3-ap-northeast-1.amazonaws.com/graphy-bot/result.png',
@@ -25,14 +25,7 @@ def listen_func(message, content):
 
 
 def render(text):
-    old = './dest/old.dot'
-    new = './dest/new.dot'
-    merge = './dest/merge.dot'
-    result = './dest/result'
-    r = renderer.Renderer()
-    r.copy(merge, old)
-    r.add_nodes(text)
-    r.add_edges(text)
-    r.save(new)
-    r.merge(old, new, merge)
-    r.render_from_dot(merge, result)
+    r = renderer.Renderer(text)
+    merged_text = r.merge()
+    r.save(merged_text)
+    r.render(merged_text)
