@@ -12,7 +12,11 @@ class Renderer(object):
     def __init__(self):
         self.dot = graphviz.Digraph(format='png')
         self.dot.attr('node', shape='circle')
-        self.s3 = boto3.resource('s3')
+        # TODO: Bucket policy
+        self.session = boto3.session.Session(aws_access_key_id=os.environ['AWS_ACCESS_KEY_ID'],
+                                             aws_secret_access_key=os.environ['AWS_SECRET_ACCESS_KEY'],
+                                             region_name='ap-northeast-1')
+        self.s3 = self.session.resource('s3')
         self.s3_bucket = os.environ['S3_BUCKET_NAME']
 
     def add_edge(self, child, parent):
@@ -44,7 +48,7 @@ class Renderer(object):
             self.dot.node(str(node), str(node))
 
     def copy(self, src, dest):
-        subprocess.call(['cp', '-f', src, dest])
+        # subprocess.call(['cp', '-f', src, dest])
         self.s3.Object(self.s3_bucket, 'old.dot').copy_from(
             CopySource={'Bucket': self.s3_bucket, 'Key': 'merge.dot'})
 
@@ -53,7 +57,8 @@ class Renderer(object):
         :param string src: a dot file name in a source.
         :param string img: an image file name in a destination.
         """
-        graphviz.Source(open(src, 'r').read(), format='png').render(img, view=True, cleanup=True)
+        # graphviz.Source(open(src, 'r').read(), format='png').render(img, view=True, cleanup=True)
+        
         dot_data = self.s3.Object(
             self.s3_bucket, 'merge.dot').get()['Body'].read().decode('utf-8')
 
@@ -69,24 +74,33 @@ class Renderer(object):
         # cmd = 'gvpack -u old.dot new.dot | sed \'s/_gv[0-9]\+//g\' | dot -Tpng -o result.png'
         # res = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE)
 
-        gvpack = subprocess.Popen(['gvpack', '-u', old, new],
-                                  stdout=subprocess.PIPE)
+        # gvpack = subprocess.Popen(['gvpack', '-u', old, new],
+                                  # stdout=subprocess.PIPE)
 
-        sed = subprocess.Popen(['sed', 's/_gv[0-9]\+//g'],
-                               stdin=gvpack.stdout,
-                               stdout=subprocess.PIPE)
+        # sed = subprocess.Popen(['sed', 's/_gv[0-9]\+//g'],
+                               # stdin=gvpack.stdout,
+                               # stdout=subprocess.PIPE)
 
-        with open(out, 'wb+') as outstream:
-            ps = subprocess.Popen(['dot'],
-                                  stdin=sed.stdout,
-                                  stdout=outstream)
-            ps.wait()
+        # with open(out, 'wb+') as outstream:
+            # ps = subprocess.Popen(['dot'],
+                                  # stdin=sed.stdout,
+                                  # stdout=outstream)
+            # ps.wait()
 
+        old_dot = self.s3.Object(
+            self.s3_bucket, 'old.dot').get()['Body'].read().decode('utf-8')
+        
+        new_dot = self.s3.Object(
+            self.s3_bucket, 'new.dot').get()['Body'].read().decode('utf-8')
+
+        merge_dot = old_dot + "subgraph cluster { " + new_dot + "}"
+        self.s3.Object(self.s3_bucket, 'merge.dot').put(Body=merge_dot)
+        
     def save(self, name):
         """
         :param string name: a file name.
         """
-        self.dot.save(filename=name)
+        # self.dot.save(filename=name)
 
         self.s3.Object(self.s3_bucket, 'new.dot').put(
             Body=self.dot.source.encode('UTF-8'))
