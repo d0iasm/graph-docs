@@ -58,7 +58,13 @@ class Renderer(object):
         name = 'results/result_' + datetime.datetime.now().strftime('%s') + '.png'
         self.s3.Object(self.s3_bucket, name).put(
             Body=graphviz.Source(self.dot.source, format='png').pipe())
-        return name
+        return name, text
+
+    def reset(self):
+        self.s3.Object(self.s3_bucket, 'old').copy_from(
+            CopySource={'Bucket': self.s3_bucket, 'Key': 'empty'})
+        self.s3.Object(self.s3_bucket, 'new').copy_from(
+            CopySource={'Bucket': self.s3_bucket, 'Key': 'empty'})
 
     def merge(self):
         old_text = self.s3.Object(
