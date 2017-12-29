@@ -1,7 +1,7 @@
 import boto3
+import datetime
 import graphviz
 import os
-import subprocess
 
 from . import parser
 # import parser
@@ -19,8 +19,6 @@ class Renderer(object):
                                              region_name='ap-northeast-1')
         self.s3 = self.session.resource('s3')
         self.s3_bucket = os.environ['S3_BUCKET_NAME']
-
-        self.copy()
 
     def add_edge(self, child, parent):
         """
@@ -57,8 +55,10 @@ class Renderer(object):
     def render(self, text):
         self.add_nodes(text)
         self.add_edges(text)
-        self.s3.Object(self.s3_bucket, 'result.png').put(
+        name = 'results/result_' + datetime.datetime.now().strftime('%s') + '.png'
+        self.s3.Object(self.s3_bucket, name).put(
             Body=graphviz.Source(self.dot.source, format='png').pipe())
+        return name
 
     def merge(self):
         old_text = self.s3.Object(

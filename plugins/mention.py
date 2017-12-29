@@ -1,4 +1,5 @@
 import json
+import time
 from slackbot.bot import listen_to
 
 from . import renderer
@@ -14,10 +15,10 @@ def listen_func(message, content):
     count += 1
     text += content
     if count >= 1:
-        render(text)
+        file_name = render(text)
         attachments = [{
             'text': text,
-            'image_url': 'https://s3-ap-northeast-1.amazonaws.com/graphy-bot/result.png',
+            'image_url': 'https://s3-ap-northeast-1.amazonaws.com/graphy-bot/' + file_name,
         }]
         message.send_webapi(' ', attachments=json.dumps(attachments))
         count = 0
@@ -26,6 +27,7 @@ def listen_func(message, content):
 
 def render(text):
     r = renderer.Renderer(text)
+    r.copy()
     merged_text = r.merge()
     r.save(merged_text)
-    r.render(merged_text)
+    return r.render(merged_text)
