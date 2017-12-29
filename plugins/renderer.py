@@ -10,8 +10,9 @@ from . import parser
 class Renderer(object):
     """Image renderer from natural language. """
     def __init__(self, new_text):
-        self.dot = graphviz.Digraph(format='png')
-        self.dot.attr('node', shape='circle')
+        self.dot = graphviz.Digraph(format='png', engine='twopi',
+                                    graph_attr={'engine': 'twopi'},
+                                    node_attr={'shape': 'circle'})
         self.new = new_text
         # TODO: Bucket policy
         self.session = boto3.session.Session(aws_access_key_id=os.environ['AWS_ACCESS_KEY_ID'],
@@ -19,6 +20,8 @@ class Renderer(object):
                                              region_name='ap-northeast-1')
         self.s3 = self.session.resource('s3')
         self.s3_bucket = os.environ['S3_BUCKET_NAME']
+        # self.dot.graph_attr['engine'] = 'twopi'
+        print(self.dot, self.dot.engine)
 
     def add_edge(self, child, parent):
         """
@@ -56,6 +59,7 @@ class Renderer(object):
         self.add_nodes(text)
         self.add_edges(text)
         name = 'results/result_' + datetime.datetime.now().strftime('%s') + '.png'
+        print(self.dot.source)
         self.s3.Object(self.s3_bucket, name).put(
             Body=graphviz.Source(self.dot.source, format='png').pipe())
         return name, text
