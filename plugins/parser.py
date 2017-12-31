@@ -1,4 +1,6 @@
+import re
 import sys
+import unicodedata
 if '/app/plugins' not in sys.path:
     sys.path.append('/app/plugins')
 
@@ -15,7 +17,7 @@ def find_original_word(bunsetsu):
 
 def find_nodes(line):
     knp = pyknp.KNP()
-    result = knp.parse(line)
+    result = knp.parse(remove_marks(line))
     bnst_list = result.bnst_list()
     nodes = []
     for bnst in bnst_list:
@@ -26,7 +28,7 @@ def find_nodes(line):
 
 def find_parent_child(line):
     knp = pyknp.KNP()
-    result = knp.parse(line)
+    result = knp.parse(remove_marks(line))
     bnst_list = result.bnst_list()
     bnst_dict = dict((x.bnst_id, x) for x in bnst_list)
 
@@ -39,8 +41,21 @@ def find_parent_child(line):
     return tuples
 
 
+def remove_marks(line):
+    line = re.sub(r'https?://[\w/:%#\$&\?\(\)~\.=\+\-…]+', '', line)
+    line = unicodedata.normalize('NFKC', line)
+    line = re.sub(re.compile('[!-/:-@[-`{-~]', re.IGNORECASE), '', line)
+    line = line.replace(' ', '').replace('\n', '')
+    return line
+
+
 if __name__ == '__main__':
-    line = '太郎は花子が読んでいる本を次郎に渡した'
+    line = """Pythonタグが付けられた新着投稿 - Qiita APP [8:38 AM]
+Mastodonで始めるPythonプログラミング！腕試しテスト50本ノック（初級編）
+はじめてのQiita記事です。
+2017年にMastodonで遊びたくて、苦手なプログラミングを克服して、Pythonを習得しました。
+https://takulog.info/howto-programming-for-poor-people/
+この経験からMastodonのAPIを使って練習するのは、下記の理由でプログラミング学習に有効だと感じました。 """
     tuples = find_parent_child(line)
     for t in tuples:
         print(t[0] + ' => ' + t[1])
