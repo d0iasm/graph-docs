@@ -1,5 +1,6 @@
 import re
 import sys
+import urllib.request
 import unicodedata
 if '/app/plugins' not in sys.path:
     sys.path.append('/app/plugins')
@@ -41,6 +42,14 @@ def find_parent_child(line):
     return tuples
 
 
+def get_swapwords(line):
+    slothlib_path = 'http://svn.sourceforge.jp/svnroot/slothlib/CSharp/Version1/SlothLib/NLP/Filter/StopWord/word/Japanese.txt'
+    slothlib_file = urllib.request.urlopen(slothlib_path)
+    slothlib_stopwords = [l.decode("utf-8").strip() for l in slothlib_file]
+    slothlib_stopwords = [ss for ss in slothlib_stopwords if ss]
+    return slothlib_stopwords
+
+
 def remove_marks(line):
     line = re.sub(r'https?://[\w/:%#\$&\?\(\)~\.=\+\-…]+', '', line)
     line = unicodedata.normalize('NFKC', line)
@@ -52,10 +61,11 @@ def remove_marks(line):
 if __name__ == '__main__':
     line = """Pythonタグが付けられた新着投稿 - Qiita APP [8:38 AM]
 Mastodonで始めるPythonプログラミング！腕試しテスト50本ノック（初級編）
-はじめてのQiita記事です。
+はじめてのQiita記事です。あれが近くにある。
 2017年にMastodonで遊びたくて、苦手なプログラミングを克服して、Pythonを習得しました。
-https://takulog.info/howto-programming-for-poor-people/
+http://takulog.info/howto-programming-for-poor-people/
 この経験からMastodonのAPIを使って練習するのは、下記の理由でプログラミング学習に有効だと感じました。 """
+    line = "あれが近くにある。"
     tuples = find_parent_child(line)
     for t in tuples:
         print(t[0] + ' => ' + t[1])
