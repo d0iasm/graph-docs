@@ -2,7 +2,6 @@ import re
 import sys
 import urllib.request
 import unicodedata
-import wordcloud
 if '/app/plugins' not in sys.path:
     sys.path.append('/app/plugins')
 
@@ -60,14 +59,6 @@ def remove_marks(line):
     return line
 
 
-def create_wordcloud(line):
-    line = remove_marks(line)
-    wd = wordcloud.WordCloud(background_color="white",
-                             font_path="/usr/share/fonts/truetype/takao-gothic/TakaoPGothic.ttf",
-                             width=800, height=600).generate(line)
-    wd.to_file("./sample.png")
-
-
 if __name__ == '__main__':
     line = """Pythonタグが付けられた新着投稿 - Qiita APP [8:38 AM]
 Mastodonで始めるPythonプログラミング！腕試しテスト50本ノック（初級編）
@@ -75,7 +66,6 @@ Mastodonで始めるPythonプログラミング！腕試しテスト50本ノッ�
 2017年にMastodonで遊びたくて、苦手なプログラミングを克服して、Pythonを習得しました。
 http://takulog.info/howto-programming-for-poor-people/
 この経験からMastodonのAPIを使って練習するのは、下記の理由でプログラミング学習に有効だと感じました。 """
-    create_wordcloud(line)
     tuples = find_parent_child(line)
     for t in tuples:
         print(t[0] + ' => ' + t[1])
