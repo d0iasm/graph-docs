@@ -1,4 +1,5 @@
 from collections import Counter
+import random
 import re
 import sys
 import urllib.request
@@ -16,12 +17,12 @@ class Parser(object):
         self.words = self.__find_words()
         self.counters = Counter(self.words)
 
-    
+        
     def find_nodes(self):
         nodes = []
         for word in self.words:
             w = self.__weighting(word)
-            nodes.append((word, w))
+            nodes.append((word, {'width': str(w), 'fillcolor': str(random.randint(1,12))}))
         return nodes
 
 
@@ -36,6 +37,12 @@ class Parser(object):
                                self.__find_original_word(bnst_dict[bnst.parent_id])))
 
         return tuples
+
+
+    def reset(self, text):
+        self.line = self.__remove_marks(text)
+        self.words = self.__find_words()
+        self.counters = Counter(self.words)
 
     
     def __find_original_word(self, bunsetsu):
