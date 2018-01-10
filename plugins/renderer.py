@@ -3,16 +3,15 @@ import datetime
 import graphviz
 import os
 
-from . import parser
-# import parser
+# from . import parser
+import parser
 
 
 class Renderer(object):
     """Image renderer from natural language. """
     def __init__(self, new_text):
-        self.dot = graphviz.Digraph(format='png', engine='twopi',
-                                    graph_attr={'engine': 'twopi'},
-                                    node_attr={'shape': 'circle'})
+        self.dot = graphviz.Graph(format='png', engine='neato',
+                                  node_attr={'shape': 'circle'})
         self.new = new_text
         # TODO: Bucket policy
         self.session = boto3.session.Session(aws_access_key_id=os.environ['AWS_ACCESS_KEY_ID'],
@@ -20,7 +19,6 @@ class Renderer(object):
                                              region_name='ap-northeast-1')
         self.s3 = self.session.resource('s3')
         self.s3_bucket = os.environ['S3_BUCKET_NAME']
-        # self.dot.graph_attr['engine'] = 'twopi'
         print(self.dot, self.dot.engine)
 
     def add_edge(self, child, parent):
@@ -49,7 +47,7 @@ class Renderer(object):
         :param string line: a natural language text for parsing.
         """
         for node in parser.find_nodes(line):
-            self.dot.node(str(node), str(node))
+            self.dot.node(str(node[0]), str(node[0]), width=str(node[1]), fixedsize='true')
 
     def copy(self):
         self.s3.Object(self.s3_bucket, 'old').copy_from(
@@ -81,3 +79,19 @@ class Renderer(object):
 
     def update_shape(self, shape):
         self.dot.attr('node', shape=shape)
+
+    def debug(self, line):
+        self.add_nodes(line)
+        self.add_edges(line)
+        self.dot.render('debug', view=True, cleanup=True)
+
+
+if __name__ == '__main__':
+    line = """Pythonタグが付けられた新着投稿 - Qiita APP [8:38 AM]
+Mastodonで始めるPythonプログラミング！腕試しテスト50本ノック（初級編）
+はじめてのQiita記事です。あれが近くにある。
+2017年にMastodonで遊びたくて、苦手なプログラミングを克服して、Pythonを習得しました。
+http://takulog.info/howto-programming-for-poor-people/
+この経験からMastodonのAPIを使って練習するのは、下記の理由でプログラミング学習に有効だと感じました。 """
+    r = Renderer(line)
+    r.debug(line)

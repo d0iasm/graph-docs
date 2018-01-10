@@ -22,7 +22,7 @@ def find_nodes(line):
     bnst_list = result.bnst_list()
     nodes = []
     for bnst in bnst_list:
-        nodes.append(find_original_word(bnst))
+        nodes.append((find_original_word(bnst), 1))
 
     return nodes
 
@@ -55,7 +55,6 @@ def remove_marks(line):
     line = unicodedata.normalize('NFKC', line)
     line = re.sub(re.compile('[!-/:-@[-`{-~]', re.IGNORECASE), '', line)
     line = line.replace(' ', '').replace('\n', '')
-    print(line)
     return line
 
 
