@@ -11,11 +11,8 @@ import pyknp
 
 
 class Parser(object):
-    def __init__(self, origin_text):
+    def __init__(self):
         self.knp = pyknp.KNP()
-        self.line = self.__remove_marks(origin_text)
-        self.words = self.__find_words()
-        self.counters = Counter(self.words)
 
         
     def find_nodes(self):
@@ -38,7 +35,7 @@ class Parser(object):
         return tuples
 
 
-    def reset(self, text):
+    def set(self, text):
         self.line = self.__remove_marks(text)
         self.words = self.__find_words()
         self.counters = Counter(self.words)

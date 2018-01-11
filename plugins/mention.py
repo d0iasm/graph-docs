@@ -21,7 +21,8 @@ def reset_image(message, content):
 def create_image(message, content):
     global text
     text += content
-    if len(text) > 300:
+    print("[Debug] current text length: " + str(len(text)))
+    if len(text) > 1:
         file_name, all_text = render(text)
         attachments = [{
             'text': all_text,

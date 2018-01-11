@@ -3,8 +3,8 @@ import datetime
 import graphviz
 import os
 
-# from . import parser
-import parser
+from . import parser
+# import parser
 
 
 class Renderer(object):
@@ -17,7 +17,7 @@ class Renderer(object):
                                   node_attr={'fixedsize': 'true', 'style': 'solid,filled',
                                              'color': 'black', 'shape': 'circle', 'colorscheme': 'gnbu5',
                                              'fontcolor': 'black', 'fontsize': '16'})
-        self.parser = parser.Parser(new_text)
+        self.parser = parser.Parser()
         self.new = new_text
         # TODO: Bucket policy
         self.session = boto3.session.Session(aws_access_key_id=os.environ['AWS_ACCESS_KEY_ID'],
@@ -65,13 +65,13 @@ class Renderer(object):
 
         
     def render(self, text):
-        self.parser.reset(text)
+        self.parser.set(text)
         self.add_nodes()
         self.add_edges()
         name = 'results/result_' + datetime.datetime.now().strftime('%s') + '.png'
-        print(self.dot.source)
+        print("[Debug] dot file content: " + self.dot.source)
         self.s3.Object(self.s3_bucket, name).put(
-            Body=graphviz.Source(self.dot.source, format='png').pipe())
+            Body=graphviz.Source(self.dot.source, engine='neato', format='png').pipe())
         return name, text
 
     
@@ -100,6 +100,7 @@ class Renderer(object):
     def debug(self):
         self.add_nodes()
         self.add_edges()
+        print(self.dot.source)
         self.dot.render('debug', view=True, cleanup=True)
 
 
