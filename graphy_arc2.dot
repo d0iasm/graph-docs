@@ -1,0 +1,76 @@
+digraph G {
+	graph[
+	      compound=true,
+	      newrank=true,
+	      // rankdir=LR,
+	      ];
+	
+	node[
+	     shape=box,
+	     fontname="IPAPMincho",
+	     fontsize=18,
+	     fixedsize = true,
+	     height = 0.8,
+	     width = 4.2
+	     ];
+
+	Slack -> listen[ltail=cluster_slack];
+	send -> Slack[lhead=cluster_slack];
+	S3 -> merge[ltail=cluster_s3];
+	store -> S3[lhead=cluster_s3];
+
+	fontcolor="red";
+	fontsize=22;
+	fontname="bold helvetica";
+
+	subgraph cluster_s3 {
+		label="S3";
+		
+		S3[shape=none, label=""];
+	}
+	subgraph cluster_slack {
+		label="Slack";
+		
+		Slack[shape=none, label=""];
+	}
+	subgraph cluster_heroku {
+		label="Heroku";
+		// Heroku[shape=none, label="", height=0, width=0];
+		subgraph cluster0 {
+			label="mention.py\nMention by Slack API";
+			
+			listen [label="Listen to text"];
+			send [label="Send an image to a slack group"];
+			listen -> swapword[lhead=cluster1];
+			keyword -> merge[ltail=cluster1,lhead=cluster2];
+			store -> send[ltail=cluster2];
+
+			// {rank=same; swapword; merge;}
+
+			subgraph cluster1 {
+				label="parser.py\nNatural language processing";
+				swapword [label="Remove swapword"];
+				keyword [label="Weighting node"];
+				knp [label="Dependency analysis"]
+				swapword -> knp;
+				knp -> keyword;
+			}
+			subgraph cluster2 {
+				label="renderer.py\nImage generation";
+				merge[label="Merge past text"];
+				graphviz [label="Create an image by Graphviz"];
+				store[label="Store an image to S3"];
+				merge -> graphviz;
+				graphviz -> store;
+			}
+		}
+		// Heroku2[shape=none, label="", height=0, width=0];
+	}
+	
+	{ rank=same; Slack; listen; }
+	{ rank=same; S3; send; }
+	// { rank=same; merge; graphviz; store;}
+	// { rank=same; swapword; knp; keyword;}
+	// { rank=same; Heroku2; S3;}
+	
+}

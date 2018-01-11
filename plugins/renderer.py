@@ -11,11 +11,11 @@ class Renderer(object):
     """Image renderer from natural language. """
     def __init__(self, new_text):
         self.dot = graphviz.Graph(format='png', engine='neato',
-                                  edge_attr={'color': 'white', 'fontsize': '14'},
+                                  edge_attr={'color': 'white', 'fontsize': '14', 'len': '2'},
                                   graph_attr={'overlap': 'false', 'bgcolor': '#343434',
-                                              'fontcolor': 'white', 'style': 'filled'},
+                                              'fontcolor': 'white', 'style': 'filled',},
                                   node_attr={'fixedsize': 'true', 'style': 'solid,filled',
-                                             'color': 'black', 'shape': 'circle', 'colorscheme': 'set312',
+                                             'color': 'black', 'shape': 'circle', 'colorscheme': 'gnbu5',
                                              'fontcolor': 'black', 'fontsize': '16'})
         self.parser = parser.Parser(new_text)
         self.new = new_text
@@ -104,11 +104,9 @@ class Renderer(object):
 
 
 if __name__ == '__main__':
-    line = """Pythonタグが付けられた新着投稿 - Qiita APP [8:38 AM]
-Mastodonで始めるPythonプログラミング！腕試しテスト50本ノック（初級編）
-はじめてのQiita記事です。あれが近くにある。
-2017年にMastodonで遊びたくて、苦手なプログラミングを克服して、Pythonを習得しました。
-http://takulog.info/howto-programming-for-poor-people/
-この経験からMastodonのAPIを使って練習するのは、下記の理由でプログラミング学習に有効だと感じました。 """
+    line = """この冬一番の強い寒気の影響で、西日本から北日本にかけての広い範囲で雪が降り、新潟県の山間部ではこの24時間に降った雪の量が70センチを超えている。この強い雪は12日にかけても続く見通しで、12日の予想降雪量は北陸地方（石川県を中心に）で70センチ、北海道と近畿地方で50センチなど広い範囲で大雪に警戒が必要だ。
+今季最強寒気　12日も日本海側で大雪続く。九州や四国でも積雪　12日にかけても日本海側中心に大雪のおそれ
+　11日は九州や四国でも今シーズン初めて本格的な雪が降り、長崎県長崎市や熊本県熊本市でも雪が積もった。また、四国山地では大雪となっていて、愛媛県久万高原町では午後3時の積雪が36センチに達した。"""
+    print(len(line))
     r = Renderer(line)
     r.debug()
