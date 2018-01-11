@@ -7,7 +7,6 @@ from slackbot.bot import respond_to
 from . import renderer
 
 
-count = 0
 text = ''
 
 
@@ -20,10 +19,9 @@ def reset_image(message, content):
 
 @listen_to('(.*)')
 def create_image(message, content):
-    global count, text
-    count += 1
+    global text
     text += content
-    if count >= 1:
+    if len(text) > 300:
         file_name, all_text = render(text)
         attachments = [{
             'text': all_text,
