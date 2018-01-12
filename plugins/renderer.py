@@ -3,8 +3,8 @@ import datetime
 import graphviz
 import os
 
-from . import parser
-# import parser
+# from . import parser
+import parser
 
 
 class Renderer(object):
@@ -27,29 +27,13 @@ class Renderer(object):
         self.s3_bucket = os.environ['S3_BUCKET_NAME']
 
         
-    def add_edge(self, child, parent):
-        """
-        :param string child: a child name of a node.
-        :param string parent: a parent name of a node.
-        """
-        self.dot.edge(child, parent)
-
-        
     def add_edges(self):
         """
         :param string line: a natural language text for parsing.
         """
         for child, parent in self.parser.find_parent_child():
             self.dot.edge(child, parent)
-
             
-    def add_node(self, name, label=None):
-        """
-        :param string name: a node name.
-        :param string label: a visable node name. optional.
-        """
-        self.dot.node(name, label)
-
         
     def add_nodes(self):
         """
@@ -93,11 +77,8 @@ class Renderer(object):
         self.s3.Object(self.s3_bucket, 'new').put(Body=text)
 
         
-    def update_shape(self, shape):
-        self.dot.attr('node', shape=shape)
-
-        
-    def debug(self):
+    def debug(self, text):
+        self.parser.set(text)
         self.add_nodes()
         self.add_edges()
         print(self.dot.source)
@@ -110,4 +91,4 @@ if __name__ == '__main__':
 　11日は九州や四国でも今シーズン初めて本格的な雪が降り、長崎県長崎市や熊本県熊本市でも雪が積もった。また、四国山地では大雪となっていて、愛媛県久万高原町では午後3時の積雪が36センチに達した。"""
     print(len(line))
     r = Renderer(line)
-    r.debug()
+    r.debug(line)

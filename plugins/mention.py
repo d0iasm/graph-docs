@@ -22,7 +22,8 @@ def create_image(message, content):
     global text
     text += content
     print("[Debug] current text length: " + str(len(text)))
-    if len(text) > 1:
+    print("[Debug] current text: " + text)
+    if len(text) > 300:
         file_name, all_text = render(text)
         attachments = [{
             'text': all_text,
