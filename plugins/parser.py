@@ -23,7 +23,7 @@ class Parser(object):
 
 
     def find_parent_child(self):
-        bnst_list = self.knp.parse(self.line).bnst_list()
+        bnst_list = self.__get_bnstlist(self.line)
         bnst_dict = dict((x.bnst_id, x) for x in bnst_list)
     
         tuples = []
@@ -50,12 +50,21 @@ class Parser(object):
 
 
     def __find_words(self):
-        # if len(self.line) > 200: 
-        bnst_list = self.knp.parse(self.line).bnst_list()
+        bnst_list = self.__get_bnstlist(self.line)
         words = []
         for bnst in bnst_list:
             words.append(self.__find_original_word(bnst))
         return words
+
+
+    def __get_bnstlist(self, line):
+        bnst_list = []
+        if len(line) > 250:
+            lines = line.split("。")
+            [bnst_list.extend(self.knp.parse(l).bnst_list()) for l in lines]
+        else:
+            bnst_list = self.knp.parse(line).bnst_list()
+        return bnst_list
     
 
     def __get_swapwords(self, line):
@@ -83,7 +92,14 @@ class Parser(object):
     
 if __name__ == '__main__':
     line = """2017年11月に設立されたメルペイ。メルカリが金融関連の新規事業を行うために立ち上げた子会社だ。同社の代表取締役には元グリーCFOの青柳直樹氏が就任し、役員には元WebPayのCTOでLINE Pay事業を経験した曾川景介氏らが名を連ねるなど注目を集めている。
-今まで事業の詳細については明らかになっていなかったが、年内にも仮想通貨交換業の登録申請をして、メルカリ内の決済手段としてビットコインを含む仮想通貨に対応していくようだ。"""
+今まで事業の詳細については明らかになっていなかったが、年内にも仮想通貨交換業の登録申請をして、メルカリ内の決済手段としてビットコインを含む仮想通貨に対応していくようだ。
+もう一つはコンパイルせず、検索時にパターンを設定する方法です。
+この場合、検索パターンを使いまわすことがない場合はこちらを使うとよいでしょう。
+
+2017年11月に設立されたメルペイ。メルカリが金融関連の新規事業を行うために立ち上げた子会社だ。同社の代表取締役には元グリーCFOの青柳直樹氏が就任し、役員には元WebPayのCTOでLINE Pay事業を経験した曾川景介氏らが名を連ねるなど注目を集めている。
+今まで事業の詳細については明らかになっていなかったが、年内にも仮想通貨交換業の登録申請をして、メルカリ内の決済手段としてビットコインを含む仮想通貨に対応していくようだ。
+もう一つはコンパイルせず、検索時にパターンを設定する方法です。
+この場合、検索パターンを使いまわすことがない場合はこちらを使うとよいでしょう。"""
     p = Parser()
     p.set(line)
     tuples = p.find_parent_child()

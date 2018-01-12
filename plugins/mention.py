@@ -23,14 +23,13 @@ def create_image(message, content):
     text += content
     print("[Debug] current text length: " + str(len(text)))
     print("[Debug] current text: " + text)
-    if len(text) > 300:
+    if len(text) > 500:
         file_name, all_text = render(text)
         attachments = [{
             'text': all_text,
             'image_url': 'https://s3-ap-northeast-1.amazonaws.com/graphy-bot/' + file_name,
         }]
         message.send_webapi(' ', attachments=json.dumps(attachments))
-        count = 0
         text = ''
 
 
