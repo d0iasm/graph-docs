@@ -3,8 +3,8 @@ import datetime
 import graphviz
 import os
 
-# from . import parser
-import parser
+from . import parser
+# import parser
 
 
 class Renderer(object):

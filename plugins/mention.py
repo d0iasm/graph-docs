@@ -12,6 +12,8 @@ text = ''
 
 @respond_to('(リセット|reset)', re.IGNORECASE)
 def reset_image(message, content):
+    global text
+    text = ''
     r = renderer.Renderer('')
     r.reset()
     message.reply('DONE: Reset the past text.')
@@ -23,10 +25,10 @@ def create_image(message, content):
     text += content
     print("[Debug] current text length: " + str(len(text)))
     print("[Debug] current text: " + text)
-    if len(text) > 500:
+    if len(text) > 300:
         file_name, all_text = render(text)
         attachments = [{
-            'text': all_text,
+            'text': ' ',
             'image_url': 'https://s3-ap-northeast-1.amazonaws.com/graphy-bot/' + file_name,
         }]
         message.send_webapi(' ', attachments=json.dumps(attachments))

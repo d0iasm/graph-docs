@@ -1,118 +1,25 @@
-# pyknp: Python Module for KNP/JUMAN
+# Graphy
+A chatbot to automatically generate summaries of text using evolutionary concept graphs and dependency analysis.	
+## Motivation
 
-- Kurohashi-Kawahara Lab, Kyoto University
-- Written by 
-    - [John Richardson](john@nlp.ist.i.kyoto-u.ac.jp)
-    - [Tomohide Shibata](shibata@i.kyoto-u.ac.jp)
-    - [Yuta Hayashibe](yuta-h@i.kyoto-u.ac.jp)
+### Why is this bot needed?
+I found a bottleneck of communication when I worked as an engineer in a startup company. We usually use Slack to convey information such as new specifications to colleagues, and this lets us work remotely. However, sharing information with colleagues is sometimes difficult because the amount of information has a tendency to become huge and the speed of communication required is too high, so it is not realistic to absorb all information that comes through via Slack. So, we want to only have to concentrate on information that is relevant to us.
 
-## INSTALLATION
+### What is the goal?
+The goal of Graphy is to help us decide whether or not to read all our unread messages, and to let us get an idea of their content before reading them. This bot creates an image from the text by using dependency analysis. In addition, the nodes of important keywords are emphasized by color and size.
+The following pictures are a demonstration using four paragraphs from an article from Microsoft News Center Japan. We can understand that this article says ‘cloud’ and ‘digital’ are accelerating because the nodes ‘cloud’, ‘digital’, and ‘accelerate’ stand out. If you are not interested in this content from the unread messages, you can skip over them. That is why this bot is useful in terms of supporting communication and saving time.
 
-python setup.py install [--prefix=path]
+## System
+This bot works using Python on Heroku. There are mainly two stages to create an image from text. The first stage is natural language processing by using the dependency analysis tools Juman and Knp. The second stage is image generation by using the graph visualization tool Graphviz. 
 
-## USAGE
+Language: Python  
+Tool: Juman, Knp, Graphviz  
+Platform: Heroku, Slack  
+Data store: S3  
 
-The usage of pyknp is designed to be as similar as possible to the official
-Perl module. Please check the code and the Perl module documentation for further
-information.
+### Key point
+The most difficult part in this project is weighting to node because it is important that we make a judgement of which words are keywords. In the end, I used the small world effect, from graph theory. It says that any arbitrary two vertices are likely connected by passing through a small number of vertices in the middle. Small world graphs have hub nodes such that the small world would be destroyed if these nodes are removed. I defined these hub nodes as the keywords of the whole text.
 
-JUMAN and KNP can be invoked by making an instance of the classes Juman and KNP
-respectively. By default, JUMAN/KNP will be called as a subprocess from the
-binaries juman/knp found in the PATH environment variable. Specifying
-server=HOSTNAME and port=NUMBER in the constructor will switch to server mode,
-where JUMAN/KNP is queried as a server run using the -S option.
+### Improvement
+I still have things to improve in this project. Each node should have a link to the original text. This feature would allow you to read the original text easily if you wanted to.
 
-The methods juman.analysis('sentence') and knp.parse('sentence') return a list
-of morphemes (MList) and bunsetsu (BList) respectively, containing Morpheme and
-Bunsetsu objects. To read already parsed data from a file, use
-juman.result('data') or knp.result('data').
-
-Morphemes contain the following:
-    mrph_id (= id in Perl module), midasi, yomi, genkei, hinsi, hinsi_id,
-    bunrui, bunrui_id, katuyou1, katuyou1_id, katuyou2, katuyou2_id, imis,
-    fstring
-
-Bunsetsu contain the following:
-    mrph_list (list of Morphemes), tag_list (list of Tags), parent_id (ID of
-    parent bunsetsu), parent (parent bunsetsu), children (child bunsetsu, = child in Perl module),
-    dpndtype, fstring (feature string), bnst_id (= id in Perl module) 
-
-Tags contain the following:
-    mrph_list (list of Morphemes), parent_id, parent, children,
-    dpndtype, fstring (feature string), tag_id (= id in Perl module)
-
-Note that the pyknp module expects all input/output to be in Unicode, not any
-encoding such as UTF-8. Queries are sent to JUMAN/KNP after converting
-internally to UTF-8.
-
-## EXAMPLE
-
-### Juman
-    #-*- encoding: utf-8 -*-
-    from pyknp import Juman
-    import sys
-    import codecs
-    sys.stdin = codecs.getreader('utf_8')(sys.stdin)
-    sys.stdout = codecs.getwriter('utf_8')(sys.stdout)
-    
-    # Use Juman in subprocess mode
-    juman = Juman()
-    result = juman.analysis(u"これはペンです。")
-    print ','.join(mrph.midasi for mrph in result)
-    
-    for mrph in result.mrph_list():
-        print u"見出し:%s, 読み:%s, 原形:%s, 品詞:%s, 品詞細分類:%s, 活用型:%s, 活用形:%s, 意味情報:%s, 代表表記:%s" \
-        % (mrph.midasi, mrph.yomi, mrph.genkei, mrph.hinsi, mrph.bunrui, mrph.katuyou1, mrph.katuyou2, mrph.imis, mrph.repname)
-    
-    # Use Juman in server mode
-    juman = Juman(server='localhost', port=12345)
-    ...
-
-#### Read from file
-    data = ""
-    with open("result.juman") as file_in:
-        for line in file_in:
-            data += line.decode('utf-8')
-            if line.strip() == "EOS":
-                result = juman.result(data)
-                print ",".join(mrph.genkei for mrph in result.mrph_list())
-                data = ""
-
-### KNP
-    #-*- encoding: utf-8 -*-
-    from pyknp import KNP
-    import sys
-    import codecs
-    sys.stdin = codecs.getreader('utf_8')(sys.stdin)
-    sys.stdout = codecs.getwriter('utf_8')(sys.stdout)
-    
-    # Use KNP in subprocess mode
-    knp = KNP()
-    # if you don't need case analysis
-    # knp = KNP(option='-dpnd -tab')
-    result = knp.parse(u"京都大学に行った。")
-    
-    # loop for bunsetsu
-    for bnst in result.bnst_list():
-        print u"ID:%s, 見出し:%s, 係り受けタイプ:%s, 親文節ID:%s, 素性:%s" \
-        % (bnst.bnst_id, "".join(mrph.midasi for mrph in bnst.mrph_list()), bnst.dpndtype, bnst.parent_id, bnst.fstring)
-    
-    # loop for tag (kihonku, basic phrase)
-    for tag in result.tag_list():
-        print u"ID:%s, 見出し:%s, 係り受けタイプ:%s, 親文節ID:%s, 素性:%s" \
-        % (tag.tag_id, "".join(mrph.midasi for mrph in tag.mrph_list()), tag.dpndtype, tag.parent_id, tag.fstring)
-    
-    # loop for mrph
-    for mrph in result.mrph_list():
-        print u"見出し:%s, 読み:%s, 原形:%s, 品詞:%s, 品詞細分類:%s, 活用型:%s, 活用形:%s, 意味情報:%s, 代表表記:%s" \
-        % (mrph.midasi, mrph.yomi, mrph.genkei, mrph.hinsi, mrph.bunrui, mrph.katuyou1, mrph.katuyou2, mrph.imis, mrph.repname)
-
-#### Read from file
-    data = ""
-    with open("result.knp") as file_in:
-        for line in file_in:
-            data += line.decode('utf-8')
-            if line.strip() == "EOS":
-                result = knp.result(data)
-                print ",".join(mrph.genkei for mrph in result.mrph_list())
-                data = ""
