@@ -27,15 +27,18 @@ class Parser(object):
     def find_parent_child(self):
         bnst_list = self.__get_bnstlist(self.line)
         bnst_dict = dict((x.bnst_id, x) for x in bnst_list)
+        print()
     
         tuples = []
         for bnst in bnst_list:
-            original = self.__find_original_word(bnst)
-            if (original[0] in self.swapwords) or (original[1] not in self.ok_type): continue
+            child = self.__find_original_word(bnst)
+            if child[0] in self.swapwords or child[1] not in self.ok_type: continue
                 
             if bnst.parent_id != -1:
-                tuples.append((original[0],
-                               self.__find_original_word(bnst_dict[bnst.parent_id])[0]))
+                parent = self.__find_original_word(bnst_dict[bnst.parent_id])
+                if parent[0] in self.swapwords or parent[1] not in self.ok_type: continue
+
+                tuples.append((child[0], parent[0]))
 
         return tuples
 
@@ -59,7 +62,7 @@ class Parser(object):
         words = []
         for bnst in bnst_list:
             original = self.__find_original_word(bnst)
-            if (original[0] in self.swapwords) or (original[1] not in self.ok_type): continue
+            if original[0] in self.swapwords or original[1] not in self.ok_type: continue
                 
             words.append(original[0])
         return words
