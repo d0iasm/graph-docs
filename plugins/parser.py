@@ -13,13 +13,13 @@ import pyknp
 class Parser(object):
     def __init__(self):
         self.knp = pyknp.KNP()
+        self.ok_type = ['形容詞', '名詞', '動詞']
+        self.swapwords = self.__get_swapwords()
 
         
     def find_nodes(self):
         nodes = []
         for word in self.words:
-            if word in self.swapwords: continue
-                
             nodes.append((word, self.__weighting(word)))
         return nodes
 
@@ -31,10 +31,11 @@ class Parser(object):
         tuples = []
         for bnst in bnst_list:
             original = self.__find_original_word(bnst)
-            if original in self.swapwords: continue
+            if (original[0] in self.swapwords) or (original[1] not in self.ok_type): continue
                 
             if bnst.parent_id != -1:
-                tuples.append((original, self.__find_original_word(bnst_dict[bnst.parent_id])))
+                tuples.append((original[0],
+                               self.__find_original_word(bnst_dict[bnst.parent_id])[0]))
 
         return tuples
 
@@ -42,23 +43,25 @@ class Parser(object):
     def set(self, text):
         self.line = self.__remove_marks(text)
         self.words = self.__find_words()
-        self.swapwords = self.__get_swapwords()
         self.counters = Counter(self.words)
 
     
     def __find_original_word(self, bunsetsu):
         """
         @param bunsetsu pyknp.knp.bunsetsu Class
-        @return an original word
+        @return an original word and a part of speech
         """
-        return bunsetsu.mrph_list()[0].genkei
+        return (bunsetsu.mrph_list()[0].genkei, bunsetsu.mrph_list()[0].hinsi)
 
 
     def __find_words(self):
         bnst_list = self.__get_bnstlist(self.line)
         words = []
         for bnst in bnst_list:
-            words.append(self.__find_original_word(bnst))
+            original = self.__find_original_word(bnst)
+            if (original[0] in self.swapwords) or (original[1] not in self.ok_type): continue
+                
+            words.append(original[0])
         return words
 
 
@@ -84,6 +87,7 @@ class Parser(object):
         line = re.sub(r'https?://[\w/:%#\$&\?\(\)~\.=\+\-…]+', '', line)
         line = unicodedata.normalize('NFKC', line)
         line = re.sub(re.compile('[!-/:-@[-`{-~]', re.IGNORECASE), '', line)
+        line = re.sub(re.compile('([+-]?[0-9]+\.?[0-9]*)'), '', line)
         line = line.replace(' ', '').replace('\n', '')
         return line
 
@@ -96,7 +100,32 @@ class Parser(object):
 
     
 if __name__ == '__main__':
-    line = """今回の勝負は負けそうだ。あそこに犬が一匹いる。"""
+    line = """町というのはちいちゃくって、城壁がこう町全体をぐるっと回ってて、それが城壁の上を歩いても１時間ぐらいですよね。１時間かからないぐらいだね。４、５０分で。そうそう。
+ほいでさあ、ずっと歩いていたんだけど、そうすと上から、なんか町の中が見れるじゃん。
+あるよね。
+ほいでさあ、なんか途中でワンちゃんに会ったんだね。
+散歩をしてるワンちゃんに会ったんだ。
+城壁の上をやっぱ観光客なんだけどワンちゃん連れてきてる人たち結構多くて。
+で、こう、そのワンちゃんと２人を、なに、お父さんとお母さんと歩いて、ワンちゃんに会ったんだ。
+途中で。ワンちゃーんとか言ってなでて、ほいで、この人たちはこっち行って、あたしらこっち行ったじゃん。
+ずうーとこうやって回ってきてるの。
+また会っちゃって。
+ここで。
+そうしたら。
+おー、そら地球はやっぱり丸かったみたいだね。　
+そうしたらそのワンちゃんがなんかか喜んじゃって、で、あたしの方に走ってきて、とびついてきちゃってさ。
+別にあたしさあ、別にさっきなでただけなのにさあ、なんかすごーいなつかれちゃってね。　
+さっきね、別に、そんなになでてもいないんだよ。
+よしよしって言っただけなのに。
+あらワンちゃんだーとか言ってすれ違ったんだよ。
+普通に。
+それでその次のとき、向こうの方からはーっといってかけてくるじゃん。
+すごい勢いで走って。
+私、あ、あーさっきの犬だとか私たちが言っとるじゃん。
+あんで向こうの人たちも、あっ、さっき会った子たちねみたいな感じで気がついたじゃん。
+犬も気がついたじゃん。
+じゃははって走ってきちゃって、犬が。
+そうなんだ。"""
     p = Parser()
     p.set(line)
     tuples = p.find_parent_child()
