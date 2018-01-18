@@ -18,11 +18,7 @@ class Parser(object):
 
         
     def find_nodes(self):
-        nodes = []
-        for word in self.words:
-            nodes.append((word, self.__weighting(word)))
-        return nodes
-
+        return self.words
 
     def find_parent_child(self):
         bnst_list = self.__get_bnstlist(self.line)
@@ -46,7 +42,6 @@ class Parser(object):
     def set(self, text):
         self.line = self.__remove_marks(text)
         self.words = self.__find_words()
-        self.counters = Counter(self.words)
 
     
     def __find_original_word(self, bunsetsu):
@@ -93,13 +88,6 @@ class Parser(object):
         line = re.sub(re.compile('([+-]?[0-9]+\.?[0-9]*)'), '', line)
         line = line.replace(' ', '').replace('\n', '')
         return line
-
-    
-    def __weighting(self, word):
-        if word in self.counters:
-            return {'width': str(self.counters[word]), 'fillcolor': str(min(5, self.counters[word])),
-                        'fontsize': str(16+self.counters[word]**2)}
-        return {'width': str(1), 'fillcolor': '1'}
 
     
 if __name__ == '__main__':

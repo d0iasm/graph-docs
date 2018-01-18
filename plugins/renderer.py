@@ -5,6 +5,8 @@ import os
 
 # from . import parser
 import parser
+# from . import weighting
+import weighting
 
 
 class Renderer(object):
@@ -36,10 +38,10 @@ class Renderer(object):
             
         
     def add_nodes(self):
-        """
-        :param string line: a natural language text for parsing.
-        """
-        for node in self.parser.find_nodes():
+        nodes = self.parser.find_nodes()
+        edges = self.parser.find_parent_child()
+        w_nodes = weighting.weighting(nodes, edges)
+        for node in w_nodes:
             self.dot.node(node[0], label=node[0], **node[1])
 
             
