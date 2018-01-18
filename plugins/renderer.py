@@ -18,7 +18,7 @@ class Renderer(object):
                                   graph_attr={'overlap': 'false', 'bgcolor': '#343434',
                                               'fontcolor': 'white', 'style': 'filled',},
                                   node_attr={'fixedsize': 'true', 'style': 'solid,filled',
-                                             'color': 'black', 'shape': 'circle', 'colorscheme': 'gnbu5',
+                                             'color': 'black', 'shape': 'circle', 'colorscheme': 'gnbu7',
                                              'fontcolor': 'black', 'fontsize': '16'})
         self.parser = parser.Parser()
         self.new = new_text

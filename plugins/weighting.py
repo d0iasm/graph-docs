@@ -11,11 +11,11 @@ def weighting(nodes, edges):
     for node in nodes:
         attr = {'fillcolor': '1', 'fontsize': '16', 'width': '1'}
         if node in color_counters:
-            attr['fillcolor'] = str(min(5, color_counters[node]))
+            attr['fillcolor'] = str(min(7, color_counters[node]))
 
         if node in size_counters:
-            attr['fontsize'] = str(16 + size_counters[node]**2)
-            attr['width'] = str(min(5, size_counters[node]))
+            attr['fontsize'] = str(16 + size_counters[node]*2)
+            attr['width'] = str(size_counters[node])
 
         w_nodes.append((node, attr))
     return w_nodes
