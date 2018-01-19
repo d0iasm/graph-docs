@@ -14,7 +14,8 @@ def nc_data():
                 text = re.sub(r'[F|M][0-9]{3}：', '', line.strip())
                 text = re.sub(r'（.*）', '', text)
                 text = re.sub(r'＜.*＞', '', text)
-                content.append(text)
+                text = re.sub(r'〜', '', text)
+                content.append(text + '\n')
         removed_files.append(content)
 
         
