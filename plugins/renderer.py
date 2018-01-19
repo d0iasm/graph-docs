@@ -58,7 +58,7 @@ class Renderer(object):
         name = 'results/result_' + datetime.datetime.now().strftime('%s') + '.png'
         print("[Debug] dot file content: " + self.dot.source)
         self.s3.Object(self.s3_bucket, name).put(
-            Body=graphviz.Source(self.dot.source, engine='neato', format='png').pipe())
+            Body=graphviz.Source(self.dot.source, engine='neato', encoding='utf-8', format='png').pipe())
         return name, text
 
     
