@@ -76,7 +76,7 @@ class Parser(object):
 
     def __get_stopwords(self):
         stopwords = '' 
-        with open('stopwords.txt', 'r') as f:
+        with open('./plugins/stopwords.txt', 'r') as f:
             stopwords = f.read()
         return stopwords.split()
 
