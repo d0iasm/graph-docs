@@ -14,7 +14,7 @@ class Parser(object):
     def __init__(self):
         self.knp = pyknp.KNP()
         self.ok_type = ['形容詞', '名詞', '動詞']
-        self.swapwords = self.__get_swapwords()
+        self.swapwords = self.__get_stopwords()
 
         
     def find_nodes(self):
@@ -74,14 +74,13 @@ class Parser(object):
         return bnst_list
     
 
-    def __get_swapwords(self):
-        slothlib_path = 'http://svn.sourceforge.jp/svnroot/slothlib/CSharp/Version1/SlothLib/NLP/Filter/StopWord/word/Japanese.txt'
-        slothlib_file = urllib.request.urlopen(slothlib_path)
-        slothlib_stopwords = [l.decode("utf-8").strip() for l in slothlib_file]
-        slothlib_stopwords = [ss for ss in slothlib_stopwords if ss]
-        return slothlib_stopwords
+    def __get_stopwords(self):
+        stopwords = '' 
+        with open('stopwords.txt', 'r') as f:
+            stopwords = f.read()
+        return stopwords.split()
 
-
+    
     def __remove_marks(self, line):
         line = re.sub(r'https?://[\w/:%#\$&\?\(\)~\.=\+\-…]+', '', line)
         line = unicodedata.normalize('NFKC', line)
