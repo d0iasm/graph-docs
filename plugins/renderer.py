@@ -12,7 +12,6 @@ from . import weighting
 class Renderer(object):
     """Image renderer from natural language. """
     def __init__(self, new_text):
-        print('debug renderer init')
         self.dot = graphviz.Graph(format='png', engine='neato',
                                   edge_attr={'color': 'white', 'fontsize': '14', 'len': '2'},
                                   graph_attr={'overlap': 'false', 'bgcolor': '#343434',
@@ -52,9 +51,7 @@ class Renderer(object):
 
         
     def render(self, text):
-        print('debug parser set in def render!')
         self.parser.set(text)
-        print('debug DONE parser set in def render!')
         self.add_nodes()
         self.add_edges()
         name = 'results/result_' + datetime.datetime.now().strftime('%s') + '.png'

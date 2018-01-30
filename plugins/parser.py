@@ -12,7 +12,6 @@ import pyknp
 
 class Parser(object):
     def __init__(self):
-        print('DEBUG: parser init')
         self.knp = pyknp.KNP()
         self.ok_type = ['形容詞', '名詞', '動詞']
         self.swapwords = self.__get_stopwords()

@@ -28,6 +28,7 @@ def reset_image(message):
     r = renderer.Renderer('')
     r.reset()
     message.reply('DONE: Reset the past text.')
+    print('[Debug] Reset the past text')
 
 
 @listen_to('(.*)')
