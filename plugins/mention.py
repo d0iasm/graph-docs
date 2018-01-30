@@ -10,7 +10,14 @@ from . import renderer
 text = ''
 
 
-@respond_to('reset', re.IGNORECASE)
+@respond_to('hi', re.IGNORECASE)
+def hi(message):
+    message.reply('I can understand hi or HI!')
+    message.react('+1')
+
+    
+@respond_to('(リセット|reset)', re.IGNORECASE)
+@respond_to('(.*)', re.IGNORECASE)
 def reset_image(message, content):
     global text
     text = ''
