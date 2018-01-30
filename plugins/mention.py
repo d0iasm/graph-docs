@@ -10,7 +10,7 @@ from . import renderer
 text = ''
 
 
-@respond_to('(リセット|reset)', re.IGNORECASE)
+@respond_to('reset', re.IGNORECASE)
 def reset_image(message, content):
     global text
     text = ''
