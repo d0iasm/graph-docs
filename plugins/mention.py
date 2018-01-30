@@ -13,12 +13,11 @@ text = ''
 @respond_to('ヘルプ|help', re.IGNORECASE)
 def help(message):
     message.reply("""
-You can ask me one of the following questions by mentioning such as ``@graphy``:
-`リセット` or `reset`: You can delete all past text.
+You can ask me one of the following questions by mentioning such as `@graphy`:
+`リセット` or `reset`: You can delete all past text to initialize an image.
 `ヘルプ` or `help`: You can know how to use this bot. this message will be sent.
 
-This bot listen all text and create an image from it automatically if you invite this bot and do not mention.
-You can remove this bot whenever you want to.
+This bot listen all text and create an image from it automatically if you invite this bot and do not mention.You can remove this bot whenever you want to.
 """)
 
     
@@ -37,7 +36,7 @@ def create_image(message, content):
     text += content
     print("[Debug] Current text length: " + str(len(text)))
     print("[Debug] Current text: " + text)
-    if len(text) > 1260:
+    if len(text) > 300:
         file_name, all_text = render(text)
         attachments = [{
             'text': ' ',
