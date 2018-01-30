@@ -36,7 +36,7 @@ def create_image(message, content):
     text += content
     print("[Debug] Current text length: " + str(len(text)))
     print("[Debug] Current text: " + text)
-    if len(text) > 300:
+    if len(text) > 100:
         print('debug start to render')
         file_name, all_text = render(text)
         print('debug end to render and get file name', file_name)
