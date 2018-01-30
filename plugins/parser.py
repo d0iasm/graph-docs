@@ -76,6 +76,7 @@ class Parser(object):
         if len(line) > 250:
             lines = line.split("。")
             print('[Debug] line split', lines)
+            print('[Debug] this!!!!!!!', [bnst_list.extend(self.knp.parse(l).bnst_list()) for l in lines])
             [bnst_list.extend(self.knp.parse(l).bnst_list()) for l in lines]
         else:
             bnst_list = self.knp.parse(line).bnst_list()
