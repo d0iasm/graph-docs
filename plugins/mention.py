@@ -11,15 +11,20 @@ from . import renderer
 text = ''
 
 
-@default_reply
-def hi(message):
-    message.reply('I can understand hi or HI!')
-    message.react('+1')
+@respond_to('(ヘルプ|help)', re.IGNORECASE)
+def help(message):
+    message.reply("""
+You can ask me one of the following questions by mentioning such as ``@graphy``:
+``リセット`` or ``reset``: 
+``ヘルプ`` or ``help``: You can know how to use this bot. this message will be sent.
+
+This bot listen all text and create an image from it automatically if you invite this bot and do not mention.
+You can remove this bot whenever you want to.
+""")
 
     
 @respond_to('(リセット|reset)', re.IGNORECASE)
-@respond_to('(.*)', re.IGNORECASE)
-def reset_image(message, content):
+def reset_image(message):
     global text
     text = ''
     r = renderer.Renderer('')
