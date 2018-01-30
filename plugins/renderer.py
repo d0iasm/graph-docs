@@ -3,10 +3,10 @@ import datetime
 import graphviz
 import os
 
-# from . import parser
-import parser
-# from . import weighting
-import weighting
+from . import parser
+# import parser
+from . import weighting
+# import weighting
 
 
 class Renderer(object):
