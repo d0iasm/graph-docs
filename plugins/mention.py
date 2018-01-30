@@ -2,6 +2,7 @@ import json
 import re
 from slackbot.bot import listen_to
 from slackbot.bot import respond_to
+from slackbot.bot import default_reply
 
 
 from . import renderer
@@ -10,7 +11,7 @@ from . import renderer
 text = ''
 
 
-@respond_to('hi', re.IGNORECASE)
+@default_reply
 def hi(message):
     message.reply('I can understand hi or HI!')
     message.react('+1')
