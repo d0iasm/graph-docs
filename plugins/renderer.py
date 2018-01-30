@@ -3,16 +3,16 @@ import datetime
 import graphviz
 import os
 
-from . import parser
-# import parser
-from . import weighting
-# import weighting
-
+# from . import parser
+import parser
+# from . import weighting
+import weighting
 
 
 class Renderer(object):
     """Image renderer from natural language. """
     def __init__(self, new_text):
+        print('debug renderer init')
         self.dot = graphviz.Graph(format='png', engine='neato',
                                   edge_attr={'color': 'white', 'fontsize': '14', 'len': '2'},
                                   graph_attr={'overlap': 'false', 'bgcolor': '#343434',
@@ -89,32 +89,7 @@ class Renderer(object):
 
 
 if __name__ == '__main__':
-    line = """町というのはちいちゃくって、城壁がこう町全体をぐるっと回ってて、それが城壁の上を歩いても１時間ぐらいですよね。１時間かからないぐらいだね。４、５０分で。そうそう。
-ほいでさあ、ずっと歩いていたんだけど、そうすと上から、なんか町の中が見れるじゃん。
-あるよね。
-ほいでさあ、なんか途中でワンちゃんに会ったんだね。
-散歩をしてるワンちゃんに会ったんだ。
-城壁の上をやっぱ観光客なんだけどワンちゃん連れてきてる人たち結構多くて。
-で、こう、そのワンちゃんと２人を、なに、お父さんとお母さんと歩いて、ワンちゃんに会ったんだ。
-途中で。ワンちゃーんとか言ってなでて、ほいで、この人たちはこっち行って、あたしらこっち行ったじゃん。
-ずうーとこうやって回ってきてるの。
-また会っちゃって。
-ここで。
-そうしたら。
-おー、そら地球はやっぱり丸かったみたいだね。　
-そうしたらそのワンちゃんがなんかか喜んじゃって、で、あたしの方に走ってきて、とびついてきちゃってさ。
-別にあたしさあ、別にさっきなでただけなのにさあ、なんかすごーいなつかれちゃってね。　
-さっきね、別に、そんなになでてもいないんだよ。
-よしよしって言っただけなのに。
-あらワンちゃんだーとか言ってすれ違ったんだよ。
-普通に。
-それでその次のとき、向こうの方からはーっといってかけてくるじゃん。
-すごい勢いで走って。
-私、あ、あーさっきの犬だとか私たちが言っとるじゃん。
-あんで向こうの人たちも、あっ、さっき会った子たちねみたいな感じで気がついたじゃん。
-犬も気がついたじゃん。
-じゃははって走ってきちゃって、犬が。
-そうなんだ。"""
+    line = """テストメッセージ。"""
     print(len(line))
     r = Renderer(line)
     r.debug(line)
