@@ -1,7 +1,7 @@
 # Graphy
 A chatbot to automatically generate summaries of text using evolutionary concept graphs and dependency analysis.	
 ## Development
-```py
+```
 $ python app.py
 ```
 
