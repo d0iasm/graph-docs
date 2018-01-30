@@ -41,8 +41,9 @@ class Parser(object):
 
 
     def set(self, text):
-        print('DEBUG parse text start')
+        print('[Debug] Parse text start', text)
         self.line = self.__remove_marks(text)
+        print('[Debug] Removed marks', text)
         self.words = self.__find_words()
         print('[Debug] Parsed text: ', self.line)
 
