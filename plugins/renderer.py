@@ -52,7 +52,9 @@ class Renderer(object):
 
         
     def render(self, text):
+        print('debug parser set in def render!')
         self.parser.set(text)
+        print('debug DONE parser set in def render!')
         self.add_nodes()
         self.add_edges()
         name = 'results/result_' + datetime.datetime.now().strftime('%s') + '.png'

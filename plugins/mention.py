@@ -37,7 +37,9 @@ def create_image(message, content):
     print("[Debug] Current text length: " + str(len(text)))
     print("[Debug] Current text: " + text)
     if len(text) > 300:
+        print('debug start to render')
         file_name, all_text = render(text)
+        print('debug end to render and get file name', file_name)
         attachments = [{
             'text': ' ',
             'image_url': 'https://s3-ap-northeast-1.amazonaws.com/graphy-bot/' + file_name,
