@@ -5,7 +5,7 @@ A chatbot to automatically generate summaries of text using evolutionary concept
 $ python app.py
 ```
 
-## Productio
+## Production
 To start Dyno of this bot
 ```
 $ heroku ps:scale bot=1

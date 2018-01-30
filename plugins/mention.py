@@ -10,7 +10,7 @@ from . import renderer
 text = ''
 
 
-@respond_to('(ヘルプ|help)', re.IGNORECASE)
+@respond_to('ヘルプ|help', re.IGNORECASE)
 def help(message):
     message.reply("""
 You can ask me one of the following questions by mentioning such as ``@graphy``:
@@ -22,7 +22,7 @@ You can remove this bot whenever you want to.
 """)
 
     
-@respond_to('(リセット|reset)', re.IGNORECASE)
+@respond_to('リセット|reset', re.IGNORECASE)
 def reset_image(message):
     global text
     text = ''
