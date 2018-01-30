@@ -2,7 +2,6 @@ import json
 import re
 from slackbot.bot import listen_to
 from slackbot.bot import respond_to
-from slackbot.bot import default_reply
 
 
 from . import renderer
@@ -15,7 +14,7 @@ text = ''
 def help(message):
     message.reply("""
 You can ask me one of the following questions by mentioning such as ``@graphy``:
-``リセット`` or ``reset``: 
+``リセット`` or ``reset``: You can delete all past text.
 ``ヘルプ`` or ``help``: You can know how to use this bot. this message will be sent.
 
 This bot listen all text and create an image from it automatically if you invite this bot and do not mention.
