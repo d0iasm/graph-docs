@@ -21,7 +21,8 @@ class Parser(object):
         return self.words
 
     def find_parent_child(self):
-        bnst_list = self.__get_bnstlist(self.line)
+        # bnst_list = self.__get_bnstlist(self.line)
+        bnst_list = self.bnst_list
         bnst_dict = dict((x.bnst_id, x) for x in bnst_list)
         print()
     
@@ -43,6 +44,7 @@ class Parser(object):
         print('[Debug] Parse text start', text)
         self.line = self.__remove_marks(text)
         print('[Debug] Removed marks', text)
+        self.bnst_list = self.__get_bnstlist(self.line)
         self.words = self.__find_words()
         print('[Debug] Parsed text: ', self.line)
 
@@ -57,7 +59,8 @@ class Parser(object):
 
     def __find_words(self):
         print('[Debug] in find words')
-        bnst_list = self.__get_bnstlist(self.line)
+        # bnst_list = self.__get_bnstlist(self.line)
+        bnst_list = self.bnst_list
         print('[Debug] DONE find bnst_list in find words')
         words = []
         for bnst in bnst_list:
