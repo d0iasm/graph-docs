@@ -16,6 +16,8 @@ class KNP(object):
     def __init__(self, command='knp', server=None, port=31000, timeout=60,
                  option='-tab', rcfile='', pattern=r'EOS',
                  jumancommand='juman', jumanrcfile='', jumanpp=False):
+
+        print('PYKNP! path: ', sys.path)
         self.command = command
         self.server = server
         self.port = port
