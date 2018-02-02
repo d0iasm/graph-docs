@@ -1,2 +1,6 @@
 images/*
 *.tar.bz2
+bin/juman/*
+!bin/juman/bin/*
+bin/knp/*
+!bin/knp/bin/*
