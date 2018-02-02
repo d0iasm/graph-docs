@@ -6,6 +6,10 @@ import urllib.request
 import unicodedata
 if '/app/plugins' not in sys.path:
     sys.path.append('/app/plugins')
+if '/app/bin/juman/bin' not in sys.path:
+    sys.path.append('/app/bin/juman/bin')
+if '/app/bin/knp/bin' not in sys.path:
+    sys.path.append('/app/bin/knp/bin')
 
 import pyknp
 
