@@ -41,12 +41,9 @@ class Parser(object):
 
 
     def set(self, text):
-        print('[Debug] Parse text start', text)
         self.line = self.__remove_marks(text)
-        print('[Debug] Removed marks', text)
         self.bnst_list = self.__get_bnstlist(self.line)
         self.words = self.__find_words()
-        print('[Debug] Parsed text: ', self.line)
 
     
     def __find_original_word(self, bunsetsu):
