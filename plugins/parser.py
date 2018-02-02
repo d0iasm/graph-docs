@@ -24,7 +24,6 @@ class Parser(object):
         # bnst_list = self.__get_bnstlist(self.line)
         bnst_list = self.bnst_list
         bnst_dict = dict((x.bnst_id, x) for x in bnst_list)
-        print()
     
         tuples = []
         for bnst in bnst_list:
@@ -55,31 +54,24 @@ class Parser(object):
 
 
     def __find_words(self):
-        print('[Debug] in find words')
         # bnst_list = self.__get_bnstlist(self.line)
         bnst_list = self.bnst_list
-        print('[Debug] DONE find bnst_list in find words')
         words = []
         for bnst in bnst_list:
             original = self.__find_original_word(bnst)
             if original[0] in self.swapwords or original[1] not in self.ok_type: continue
                 
             words.append(original[0])
-        print('[Debug] DONE find words in find words', words)
         return words
 
 
     def __get_bnstlist(self, line):
-        print('[Debug] in get bnstlist')
         bnst_list = []
         if len(line) > 250:
             lines = line.split("。")
-            print('[Debug] line split', lines)
-            print('[Debug] this!!!!!!!', [bnst_list.extend(self.knp.parse(l).bnst_list()) for l in lines])
             [bnst_list.extend(self.knp.parse(l).bnst_list()) for l in lines]
         else:
             bnst_list = self.knp.parse(line).bnst_list()
-        print('[Debug] DONE get bnstlist', bnst_list)
         return bnst_list
     
 
