@@ -18,18 +18,18 @@ class Renderer(object):
         self.dot = graphviz.Graph(format='png', engine='neato',
                                   edge_attr={
                                       'charset': 'UTF-8', 'color': 'white',
-                                      'fontsize': '14', 'fontname': 'ＭＳ ゴシック',
+                                      'fontsize': '14', 'fontname': 'MS GOTHIC',
                                       'len': '2'
                                       },
                                   graph_attr={
                                       'bgcolor': '#343434', 'charset': 'UTF-8',
-                                      'fontcolor': 'white', 'fontname': 'ＭＳ ゴシック',
+                                      'fontcolor': 'white', 'fontname': 'MS GOTHIC',
                                       'overlap': 'false', 'style': 'filled',
                                       },
                                   node_attr={
                                       'charset': 'UTF-8',
                                       'color': 'black', 'colorscheme': 'gnbu7',
-                                      'fontcolor': 'black', 'fontname': 'ＭＳ ゴシック',
+                                      'fontcolor': 'black', 'fontname': 'MS GOTHIC',
                                       'fontsize': '16', 'fixedsize': 'true',
                                       'style': 'solid,filled', 'shape': 'circle',
                                       })
