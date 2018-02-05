@@ -17,16 +17,19 @@ class Renderer(object):
     def __init__(self, new_text):
         self.dot = graphviz.Graph(format='png', engine='neato',
                                   edge_attr={
-                                      'color': 'white', 'fontsize': '14', 'len': '2'
+                                      'charset': 'UTF-8', 'color': 'white',
+                                      'fontsize': '14', 'fontname': 'ＭＳ ゴシック',
+                                      'len': '2'
                                       },
                                   graph_attr={
                                       'bgcolor': '#343434', 'charset': 'UTF-8',
-                                      'fontcolor': 'white', 'overlap': 'false',
-                                      'style': 'filled',
+                                      'fontcolor': 'white', 'fontname': 'ＭＳ ゴシック',
+                                      'overlap': 'false', 'style': 'filled',
                                       },
                                   node_attr={
+                                      'charset': 'UTF-8',
                                       'color': 'black', 'colorscheme': 'gnbu7',
-                                      'fontcolor': 'black', 'fontname': 'MS Gothic',
+                                      'fontcolor': 'black', 'fontname': 'ＭＳ ゴシック',
                                       'fontsize': '16', 'fixedsize': 'true',
                                       'style': 'solid,filled', 'shape': 'circle',
                                       })
@@ -68,7 +71,7 @@ class Renderer(object):
         name = 'results/result_' + datetime.datetime.now().strftime('%s') + '.png'
         print("[Debug] dot file content: " + self.dot.source)
         self.s3.Object(self.s3_bucket, name).put(
-            Body=graphviz.Source(self.dot.source, engine='neato', encoding='utf-8', format='png').pipe())
+            Body=graphviz.Source(self.dot.source, engine='neato', format='png').pipe())
         return name, text
 
     

@@ -17,7 +17,6 @@ class KNP(object):
                  option='-tab', rcfile='', pattern=r'EOS',
                  jumancommand='juman', jumanrcfile='', jumanpp=False):
 
-        print('PYKNP! path: ', sys.path)
         self.command = command
         self.server = server
         self.port = port
