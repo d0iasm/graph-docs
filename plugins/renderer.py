@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 import boto3
 import datetime
 import graphviz
@@ -13,12 +16,23 @@ class Renderer(object):
     """Image renderer from natural language. """
     def __init__(self, new_text):
         self.dot = graphviz.Graph(format='png', engine='neato',
-                                  edge_attr={'color': 'white', 'fontsize': '14', 'len': '2'},
-                                  graph_attr={'overlap': 'false', 'bgcolor': '#343434',
-                                              'fontcolor': 'white', 'style': 'filled',},
-                                  node_attr={'fixedsize': 'true', 'style': 'solid,filled',
-                                             'color': 'black', 'shape': 'circle', 'colorscheme': 'gnbu7',
-                                             'fontcolor': 'black', 'fontsize': '16'})
+                                  edge_attr={
+                                      'charset': 'UTF-8', 'color': 'white',
+                                      'fontsize': '14', 'fontname': 'MS GOTHIC',
+                                      'len': '2'
+                                      },
+                                  graph_attr={
+                                      'bgcolor': '#343434', 'charset': 'UTF-8',
+                                      'fontcolor': 'white', 'fontname': 'MS GOTHIC',
+                                      'overlap': 'false', 'style': 'filled',
+                                      },
+                                  node_attr={
+                                      'charset': 'UTF-8',
+                                      'color': 'black', 'colorscheme': 'gnbu7',
+                                      'fontcolor': 'black', 'fontname': 'MS GOTHIC',
+                                      'fontsize': '16', 'fixedsize': 'true',
+                                      'style': 'solid,filled', 'shape': 'circle',
+                                      })
         self.parser = parser.Parser()
         self.new = new_text
         # TODO: Bucket policy
@@ -57,7 +71,7 @@ class Renderer(object):
         name = 'results/result_' + datetime.datetime.now().strftime('%s') + '.png'
         print("[Debug] dot file content: " + self.dot.source)
         self.s3.Object(self.s3_bucket, name).put(
-            Body=graphviz.Source(self.dot.source, engine='neato', encoding='utf-8', format='png').pipe())
+            Body=graphviz.Source(self.dot.source, engine='neato', format='png').pipe())
         return name, text
 
     

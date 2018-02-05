@@ -1,15 +1,14 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 from collections import Counter
 import random
 import re
 import sys
 import urllib.request
 import unicodedata
-if '/app/plugins' not in sys.path:
-    sys.path.append('/app/plugins')
-if '/app/bin/juman/bin' not in sys.path:
-    sys.path.append('/app/bin/juman/bin')
-if '/app/bin/knp/bin' not in sys.path:
-    sys.path.append('/app/bin/knp/bin')
+if '/root/plugins' not in sys.path:
+    sys.path.append('/root/plugins')
 
 import pyknp
 

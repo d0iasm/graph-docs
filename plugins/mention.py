@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 import json
 import re
 from slackbot.bot import listen_to
@@ -37,7 +40,7 @@ def create_image(message, content):
     text += content
     print("[Debug] Current text length: " + str(len(text)))
     print("[Debug] Current text: " + text)
-    if len(text) > 100:
+    if len(text) > 70:
         print('[Debug] start to render')
         file_name, all_text = render(text)
         print('[Debug] end to render and get file name', file_name)
