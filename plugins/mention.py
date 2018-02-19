@@ -52,6 +52,12 @@ def create_image(message, content):
         text = ''
 
 
+@respond_to('hoge', re.IGNORECASE)
+def hoge(message):
+    print('debug: thread_ts is ', message.thread_ts)
+    print('debug: message body is ', message.body)
+    
+
 def render(text):
     r = renderer.Renderer(text)
     r.copy()

@@ -10,6 +10,10 @@ import unicodedata
 if '/root/plugins' not in sys.path:
     sys.path.append('/root/plugins')
 
+if './plugins' not in sys.path:
+    sys.path.append('./plugins')
+    
+print('debug: path', sys.path)
 import pyknp
 
 
