@@ -34,7 +34,7 @@ def reset_image(message):
     print('[Debug] Reset the past text')
 
 
-@listen_to('(.*)')
+@listen_to('(.*)', re.DOTALL)
 def create_image(message, content):
     global text
     text += content
