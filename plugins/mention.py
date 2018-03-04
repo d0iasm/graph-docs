@@ -13,6 +13,17 @@ from . import renderer
 
 
 text = ''
+text_data = []
+# text_data = [
+        # {
+            # 'text': <text content>,
+            # 'channel': <channel ID>,
+            # 'message_ts': <thread_ts>,
+        # },
+        # {
+            # 'message': ...,
+        # }
+    # ]
 
 
 @respond_to('ヘルプ|help', re.IGNORECASE)
@@ -28,20 +39,27 @@ This bot listen all text and create an image from it automatically if you invite
 
 @respond_to('リセット|reset', re.IGNORECASE)
 def reset_image(message):
-    global text
+    global text, text_data
     text = ''
+    text_data = []
     r = renderer.Renderer('')
     r.reset()
-    message.reply('DONE: Reset the past text.')
-    print('[Debug] Reset the past text')
+    message.reply('DONE: Reset the past text')
+    print('Debug: Reset the past text')
 
 
 @listen_to('(.*)', re.DOTALL)
 def create_image(message, content):
-    global text
+    global text, text_data
     text += content
-    print("[Debug] Current text length: " + str(len(text)))
-    print("[Debug] Current text: " + text)
+    text_data.append({
+        'text': content,
+        'channel': message.body['channel'],
+        'message_ts': message.thread_ts,
+        })
+    print('Debug: Current text length ', len(text))
+    print('Debug: Current text ', text)
+    print('Debug: Current test data', text_data)
     if len(text) > 70:
         print('[Debug] start to render')
         file_name, all_text = render(text)
@@ -52,6 +70,7 @@ def create_image(message, content):
         }]
         message.send_webapi(' ', attachments=json.dumps(attachments))
         text = ''
+        text_data = []
 
 
 @respond_to('hoge', re.IGNORECASE)
