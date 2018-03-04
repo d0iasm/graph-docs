@@ -66,12 +66,13 @@ def create_image(message, content):
         file_name, all_text = render(text)
         print('[Debug] end to render and get file name', file_name)
         attachments = [{
-            'text': ' ',
+            'text': "\n".join([d['text'] + ': ' + d['permalink'] for d in text_data]),
             'image_url': 'https://s3-ap-northeast-1.amazonaws.com/graphy-bot/' + file_name,
         }]
         message.send_webapi(' ', attachments=json.dumps(attachments))
         text = ''
-        text_data = []
+        # TODO: Whether or not reset text_data each time to send an image
+        # text_data = []
 
 
 @respond_to('hoge', re.IGNORECASE)
