@@ -75,16 +75,6 @@ def create_image(message, content):
         # text_data = []
 
 
-@respond_to('hoge', re.IGNORECASE)
-def hoge(message):
-    print('debug: thread_ts is ', message.thread_ts)
-    print('debug: channel is ', message.body['channel'])
-    print('debug: token is ', os.environ['SLACKBOT_API_TOKEN'])
-    print('debug: channel object is ', message.channel)
-    print('debug: message body is ', message.body)
-    get_permalink(message.body['channel'], message.thread_ts)
-
-
 def render(text):
     r = renderer.Renderer(text)
     r.copy()
