@@ -56,6 +56,7 @@ def create_image(message, content):
         'text': content,
         'channel': message.body['channel'],
         'message_ts': message.thread_ts,
+        'permalink': get_permalink(message.body['channel'], message.thread_ts),
         })
     print('Debug: Current text length ', len(text))
     print('Debug: Current text ', text)
@@ -105,6 +106,8 @@ def get_permalink(channel, thread_ts):
     response = requests.get('https://slack.com/api/chat.getPermalink', headers=headers, params=params)
 
     if response.status_code == 200:
-        print('debug: print response', response.json())
+        print('debug: print response', response.json()['permalink'])
+        return response.json()['permalink']
     else:
         print('ERROR: failed to request')
+        return None
