@@ -42,8 +42,6 @@ def reset_image(message):
     global text, text_data
     text = ''
     text_data = []
-    r = renderer.Renderer('')
-    r.reset()
     message.reply('DONE: Reset the past text')
     print('Debug: Reset the past text')
 
@@ -58,29 +56,19 @@ def create_image(message, content):
         'message_ts': message.thread_ts,
         'permalink': get_permalink(message.body['channel'], message.thread_ts),
         })
+
     print('Debug: Current text length ', len(text))
     print('Debug: Current text ', text)
     print('Debug: Current test data', text_data)
+
     if len(text) > 70:
-        print('[Debug] start to render')
-        file_name, all_text = render(text)
-        print('[Debug] end to render and get file name', file_name)
+        r = renderer.Renderer(text)
+        file_name = r.render(text)
         attachments = [{
             'text': "\n".join([d['text'] + ': ' + d['permalink'] for d in text_data]),
             'image_url': 'https://s3-ap-northeast-1.amazonaws.com/graphy-bot/' + file_name,
         }]
         message.send_webapi(' ', attachments=json.dumps(attachments))
-        text = ''
-        # TODO: Whether or not reset text_data each time to send an image
-        # text_data = []
-
-
-def render(text):
-    r = renderer.Renderer(text)
-    r.copy()
-    merged_text = r.merge()
-    r.save(merged_text)
-    return r.render(merged_text)
 
 
 def get_permalink(channel, thread_ts):

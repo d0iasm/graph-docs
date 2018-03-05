@@ -15,7 +15,7 @@ from . import weighting
 class Renderer(object):
     """Image renderer from natural language. """
     def __init__(self, new_text):
-        self.dot = graphviz.Graph(format='png', engine='neato',
+        self.dot = graphviz.Graph(format='pdf', engine='neato',
                                   edge_attr={
                                       'charset': 'UTF-8', 'color': 'white',
                                       'fontsize': '14', 'fontname': 'MS GOTHIC',
@@ -42,15 +42,15 @@ class Renderer(object):
         self.s3 = self.session.resource('s3')
         self.s3_bucket = os.environ['S3_BUCKET_NAME']
 
-        
+
     def add_edges(self):
         """
         :param string line: a natural language text for parsing.
         """
         for child, parent in self.parser.find_parent_child():
             self.dot.edge(child, parent)
-            
-        
+
+
     def add_nodes(self):
         nodes = self.parser.find_nodes()
         edges = self.parser.find_parent_child()
@@ -58,41 +58,19 @@ class Renderer(object):
         for node in w_nodes:
             self.dot.node(node[0], label=node[0], **node[1])
 
-            
-    def copy(self):
-        self.s3.Object(self.s3_bucket, 'old').copy_from(
-            CopySource={'Bucket': self.s3_bucket, 'Key': 'new'})
 
-        
     def render(self, text):
         self.parser.set(text)
         self.add_nodes()
         self.add_edges()
-        name = 'results/result_' + datetime.datetime.now().strftime('%s') + '.png'
-        print("[Debug] dot file content: " + self.dot.source)
+        print("Debug: dot file content " + self.dot.source)
+
+        name = 'results/result_' + datetime.datetime.now().strftime('%s') + '.pdf'
         self.s3.Object(self.s3_bucket, name).put(
-            Body=graphviz.Source(self.dot.source, engine='neato', format='png').pipe())
-        return name, text
+            Body=graphviz.Source(self.dot.source, engine='neato', format='pdf').pipe())
+        return name
 
-    
-    def reset(self):
-        self.s3.Object(self.s3_bucket, 'old').copy_from(
-            CopySource={'Bucket': self.s3_bucket, 'Key': 'empty'})
-        self.s3.Object(self.s3_bucket, 'new').copy_from(
-            CopySource={'Bucket': self.s3_bucket, 'Key': 'empty'})
 
-        
-    def merge(self):
-        old_text = self.s3.Object(
-            self.s3_bucket, 'old').get()['Body'].read().decode('utf-8')
-
-        return (old_text + self.new).strip()
-
-    
-    def save(self, text):
-        self.s3.Object(self.s3_bucket, 'new').put(Body=text)
-
-        
     def debug(self, text):
         self.parser.set(text)
         self.add_nodes()
