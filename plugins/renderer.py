@@ -43,7 +43,7 @@ class Renderer(object):
         self.s3_bucket = os.environ['S3_BUCKET_NAME']
 
 
-    def add_edges(self):
+    def __add_edges(self):
         """
         :param string line: a natural language text for parsing.
         """
@@ -51,7 +51,7 @@ class Renderer(object):
             self.dot.edge(child, parent)
 
 
-    def add_nodes(self):
+    def __add_nodes(self):
         nodes = self.parser.find_nodes()
         edges = self.parser.find_parent_child()
         w_nodes = weighting.weighting(nodes, edges)
@@ -61,8 +61,8 @@ class Renderer(object):
 
     def render(self, text):
         self.parser.set(text)
-        self.add_nodes()
-        self.add_edges()
+        self.__add_nodes()
+        self.__add_edges()
         print("Debug: dot file content " + self.dot.source)
 
         name = 'results/result_' + datetime.datetime.now().strftime('%s') + '.pdf'
