@@ -43,9 +43,6 @@ class Renderer(object):
 
 
     def __add_edges(self):
-        """
-        :param string line: a natural language text for parsing.
-        """
         for child, parent in self.parser.find_parent_child():
             self.dot.edge(child, parent)
 
@@ -72,8 +69,8 @@ class Renderer(object):
 
     def debug(self, text):
         self.parser.set(text)
-        self.add_nodes()
-        self.add_edges()
+        self.__add_nodes()
+        self.__add_edges()
         print(self.dot.source)
         self.dot.render('debug', view=True, cleanup=True)
 
