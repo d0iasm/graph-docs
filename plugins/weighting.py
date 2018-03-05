@@ -9,10 +9,12 @@ def weighting(nodes, edges):
     childen = [e[0] for e in edges]
     parents = [e[1] for e in edges]
     size_counters = Counter(childen) + Counter(parents)
-    
+
     w_nodes = []
     for node in nodes:
-        attr = {'fillcolor': '1', 'fontsize': '16', 'width': '1'}
+        attr = {'fillcolor': '1', 'fontsize': '16', 'width': '1' }
+                # 'target': 'blank', 'tooltip': 'Go to origin' }
+        # attr['href'] = 'http://example.com/'
         if node in color_counters:
             attr['fillcolor'] = str(min(7, color_counters[node]))
 
