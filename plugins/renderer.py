@@ -15,7 +15,7 @@ from . import weighting
 class Renderer(object):
     """Image renderer from natural language. """
     def __init__(self, new_text):
-        self.dot = graphviz.Graph(format='pdf', engine='neato',
+        self.dot = graphviz.Graph(format='svg', engine='neato',
                                   edge_attr={
                                       'charset': 'UTF-8', 'color': 'white',
                                       'fontsize': '14', 'fontname': 'MS GOTHIC',
@@ -34,7 +34,6 @@ class Renderer(object):
                                       'style': 'solid,filled', 'shape': 'circle',
                                       })
         self.parser = parser.Parser()
-        self.new = new_text
         # TODO: Bucket policy
         self.session = boto3.session.Session(aws_access_key_id=os.environ['AWS_ACCESS_KEY_ID'],
                                              aws_secret_access_key=os.environ['AWS_SECRET_ACCESS_KEY'],
@@ -63,11 +62,11 @@ class Renderer(object):
         self.parser.set(text)
         self.__add_nodes()
         self.__add_edges()
-        print("Debug: dot file content " + self.dot.source)
+        print('Debug: dot file content ' + self.dot.source)
 
-        name = 'results/result_' + datetime.datetime.now().strftime('%s') + '.pdf'
+        name = 'results/result_' + datetime.datetime.now().strftime('%s') + '.svg'
         self.s3.Object(self.s3_bucket, name).put(
-            Body=graphviz.Source(self.dot.source, engine='neato', format='pdf').pipe())
+            Body=graphviz.Source(self.dot.source, engine='neato', format='svg').pipe())
         return name
 
 

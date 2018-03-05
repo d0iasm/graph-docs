@@ -64,6 +64,7 @@ def create_image(message, content):
     if len(text) > 70:
         r = renderer.Renderer(text)
         file_name = r.render(text)
+        print('Debug: file name', file_name)
         attachments = [{
             'text': "\n".join([d['text'] + ': ' + d['permalink'] for d in text_data]),
             'image_url': 'https://s3-ap-northeast-1.amazonaws.com/graphy-bot/' + file_name,
