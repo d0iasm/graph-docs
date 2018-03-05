@@ -12,8 +12,9 @@ def weighting(nodes, edges):
 
     w_nodes = []
     for node in nodes:
-        attr = {'fillcolor': '1', 'fontsize': '16', 'width': '1', 'target': 'blank'}
-        attr['href'] = 'http://example.com/'
+        attr = {'fillcolor': '1', 'fontsize': '16', 'width': '1' }
+                # 'target': 'blank', 'tooltip': 'Go to origin' }
+        # attr['href'] = 'http://example.com/'
         if node in color_counters:
             attr['fillcolor'] = str(min(7, color_counters[node]))
 

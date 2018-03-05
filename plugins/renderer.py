@@ -15,7 +15,7 @@ from . import weighting
 class Renderer(object):
     """Image renderer from natural language. """
     def __init__(self, new_text):
-        self.dot = graphviz.Graph(format='svg', engine='neato',
+        self.dot = graphviz.Graph(format='png', engine='neato',
                                   edge_attr={
                                       'charset': 'UTF-8', 'color': 'white',
                                       'fontsize': '14', 'fontname': 'MS GOTHIC',
@@ -64,9 +64,9 @@ class Renderer(object):
         self.__add_edges()
         print('Debug: dot file content ' + self.dot.source)
 
-        name = 'results/result_' + datetime.datetime.now().strftime('%s') + '.svg'
+        name = 'results/result_' + datetime.datetime.now().strftime('%s') + '.png'
         self.s3.Object(self.s3_bucket, name).put(
-            Body=graphviz.Source(self.dot.source, engine='neato', format='svg').pipe())
+            Body=graphviz.Source(self.dot.source, engine='neato', format='png').pipe())
         return name
 
 
