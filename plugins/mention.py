@@ -13,6 +13,7 @@ from . import renderer
 
 
 text = ''
+text_len = 0
 text_data = []
 # text_data = [
         # {
@@ -48,7 +49,8 @@ def reset_image(message):
 
 @listen_to('(.*)', re.DOTALL)
 def create_image(message, content):
-    global text, text_data
+    global text, text_data, text_len
+    text_len += len(content)
     text += content
     text_data.append({
         'text': content,
@@ -57,14 +59,10 @@ def create_image(message, content):
         'permalink': get_permalink(message.body['channel'], message.thread_ts),
         })
 
-    print('Debug: Current text length ', len(text))
     print('Debug: Current text ', text)
     print('Debug: Current test data', text_data)
 
-    print('Debug: body', message.body)
-    print('Debug: client', message._client)
-
-    if len(text) > 70:
+    if text_len > 70:
         r = renderer.Renderer(text)
         file_name = r.render(text)
 
@@ -73,6 +71,7 @@ def create_image(message, content):
             'image_url': 'https://s3-ap-northeast-1.amazonaws.com/graphy-bot/' + file_name,
         }]
         message.send_webapi(' ', attachments=json.dumps(attachments))
+        text_len = 0
 
 
 def get_permalink(channel, thread_ts):
